@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="← Volver"
+        style="@style/Rampify.Link" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Notificaciones"
+        style="@style/Rampify.Title" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Elige qué avisos quieres recibir."
+        style="@style/Rampify.Subtitle" />
+
+    <Switch
+        android:id="@+id/swEstado"
+        android:checked="true"
+        android:text="Cambios de estado de mis reportes"
+        style="@style/Rampify.Switch" />
+
+    <Switch
+        android:id="@+id/swCercanos"
+        android:checked="true"
+        android:text="Nuevos reportes cercanos"
+        style="@style/Rampify.Switch" />
+
+    <Switch
+        android:id="@+id/swSolicitudes"
+        android:checked="true"
+        android:text="Respuesta a mis solicitudes"
+        style="@style/Rampify.Switch" />
+
+    <Switch
+        android:id="@+id/swNovedades"
+        android:checked="false"
+        android:text="Novedades de la aplicación"
+        style="@style/Rampify.Switch" />
+
+</LinearLayout>

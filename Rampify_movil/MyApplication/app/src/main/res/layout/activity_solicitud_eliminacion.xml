@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="← Volver"
+            style="@style/Rampify.Link" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Solicitar eliminación"
+            style="@style/Rampify.Title" />
+
+        <TextView
+            android:id="@+id/tvFolioSolicitud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            style="@style/Rampify.Subtitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Por qué deseas eliminar este reporte?"
+            style="@style/Rampify.Label" />
+
+        <RadioGroup
+            android:id="@+id/rgMotivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <RadioButton
+                android:id="@+id/rbError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lo envié por error"
+                style="@style/Rampify.RadioButton" />
+
+            <RadioButton
+                android:id="@+id/rbDuplicado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Es un reporte duplicado"
+                style="@style/Rampify.RadioButton" />
+
+            <RadioButton
+                android:id="@+id/rbResuelto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="El problema ya se resolvió"
+                style="@style/Rampify.RadioButton" />
+
+            <RadioButton
+                android:id="@+id/rbDatos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Los datos son incorrectos"
+                style="@style/Rampify.RadioButton" />
+
+            <RadioButton
+                android:id="@+id/rbOtro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Otro motivo"
+                style="@style/Rampify.RadioButton" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comentarios (opcional)"
+            style="@style/Rampify.Label" />
+
+        <EditText
+            android:id="@+id/etComentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Cuéntanos más sobre tu solicitud"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLength="300"
+            style="@style/Rampify.EditText.Multiline" />
+
+        <Button
+            android:id="@+id/btnEnviarSolicitud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Enviar solicitud"
+            style="@style/Widget.Rampify.Button.Delete" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Cancelar"
+            style="@style/Widget.Rampify.Button.Secondary" />
+
+    </LinearLayout>
+</ScrollView>
