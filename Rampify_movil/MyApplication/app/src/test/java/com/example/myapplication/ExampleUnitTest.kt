@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.rampifyv1
 
 import org.junit.Test
 
