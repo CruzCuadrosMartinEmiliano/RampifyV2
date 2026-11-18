@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  SEMÁNTICOS: MODO OSCURO -->
+    <color name="app_primary">#6FB89F</color>
+    <color name="app_on_primary">#0B2A20</color>
+    <color name="app_primary_container">@color/green_800</color>
+    <color name="app_on_primary_container">@color/green_100</color>
+    <color name="app_secondary">#8FC4B0</color>
+    <color name="app_on_secondary">#0B2A20</color>
+
+    <color name="app_background">#0E1713</color>
+    <color name="app_on_background">#E1F1EC</color>
+    <color name="app_surface">#14201B</color>
+    <color name="app_on_surface">#E1F1EC</color>
+    <color name="app_surface_variant">#1E2E27</color>
+    <color name="app_on_surface_variant">@color/gray_green_400</color>
+    <color name="app_outline">#5C7A6E</color>
+    <color name="app_outline_variant">#2C4238</color>
+    <color name="app_error">#E56B6B</color>
+    <color name="app_on_error">#2B0A0A</color>
+
+    <!-- ESTADOS DE REPORTE: MODO OSCURO -->
+    <color name="status_pending_bg">#3A2E10</color>
+    <color name="status_pending_text">#F5C451</color>
+    <color name="status_pending_border">#B98410</color>
+
+    <color name="status_progress_bg">#13243F</color>
+    <color name="status_progress_text">#8DB8F5</color>
+    <color name="status_progress_border">#3B6CB8</color>
+
+    <color name="status_solved_bg">#12301E</color>
+    <color name="status_solved_text">#8ADBA3</color>
+    <color name="status_solved_border">#2E8A4A</color>
+
+</resources>

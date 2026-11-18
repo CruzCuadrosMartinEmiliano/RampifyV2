@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- PALETA BASE -->
+    <color name="green_900">#174D3B</color>
+    <color name="green_800">#235F4C</color>
+    <color name="green_700">#347A64</color>
+    <color name="green_600">#4E8D77</color>
+    <color name="gray_green_500">#849A92</color>
+    <color name="gray_green_400">#A6BAB4</color>
+    <color name="green_200">#C5DCD5</color>
+    <color name="green_100">#E1F1EC</color>
+    <color name="white">#FFFFFF</color>
+
+    <!--ALERTAS-->
+    <color name="alert_red">#D64545</color>
+    <color name="alert_red_dark">#A33538</color>
+    <color name="alert_blue">#3B7DDD</color>
+    <color name="alert_blue_dark">#2F5BA6</color>
+    <color name="alert_yellow">#E8A317</color>
+    <color name="alert_green">#2E9449</color>
+
+    <!-- BOTONES -->
+    <color name="btn_delete">@color/alert_red</color>
+    <color name="btn_edit">@color/alert_blue</color>
+    <color name="btn_action">@color/alert_green</color>
+    <color name="btn_text">#FFFFFF</color>
+
+    <!--  SEMÁNTICOS: MODO CLARO -->
+    <color name="app_primary">@color/green_900</color>
+    <color name="app_on_primary">#FFFFFF</color>
+    <color name="app_primary_container">@color/green_100</color>
+    <color name="app_on_primary_container">@color/green_900</color>
+    <color name="app_secondary">@color/green_700</color>
+    <color name="app_on_secondary">#FFFFFF</color>
+
+    <color name="app_background">#F3F8F6</color>
+    <color name="app_on_background">#14231D</color>
+    <color name="app_surface">#FFFFFF</color>
+    <color name="app_on_surface">#14231D</color>
+    <color name="app_surface_variant">@color/green_100</color>
+    <color name="app_on_surface_variant">#5C6F68</color>
+    <color name="app_outline">@color/gray_green_400</color>
+    <color name="app_outline_variant">@color/green_200</color>
+    <color name="app_error">@color/alert_red</color>
+    <color name="app_on_error">#FFFFFF</color>
+
+    <!-- ESTADOS DE REPORTE: MODO CLARO -->
+    <color name="status_pending_bg">#FFF3D6</color>
+    <color name="status_pending_text">#8A5A00</color>
+    <color name="status_pending_border">#E8A317</color>
+
+    <color name="status_progress_bg">#E3EEFD</color>
+    <color name="status_progress_text">#1F4F9E</color>
+    <color name="status_progress_border">#3B7DDD</color>
+
+    <color name="status_solved_bg">#E0F4E6</color>
+    <color name="status_solved_text">#1F6B3A</color>
+    <color name="status_solved_border">#2E9449</color>
+
 </resources>
