@@ -1,0 +1,22 @@
+# Secretos
+.env
+.env.*
+!.env.example
+# Node
+node_modules/
+# Android / IDE
+.idea/
+.gradle/
+build/
+local.properties
+*.iml
+*.apk
+.cxx/
+captures/
+# Editor / SO
+.vscode/
+.DS_Store
+Thumbs.db
+# Basura
+*.zip
+_doc_extract/
