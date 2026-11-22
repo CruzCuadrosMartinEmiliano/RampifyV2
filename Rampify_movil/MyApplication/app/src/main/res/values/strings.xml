@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">RampifyV1</string>
+    <string-array name="zonas">
+        <item>Todas</item>
+        <item>Cuauhtémoc</item>
+        <item>Miguel Hidalgo</item>
+        <item>Benito Juárez</item>
+    </string-array>
+    <string-array name="tipos_problema">
+        <item>Selecciona el tipo de falla</item>
+        <item>Rampa destruida</item>
+        <item>Rampa obstruida</item>
+        <item>Banqueta bloqueada</item>
+        <item>Banqueta en mal estado</item>
+        <item>Semáforo sin audio</item>
+        <item>Cruce peatonal borrado</item>
+        <item>Otro</item>
+    </string-array>
+    <string-array name="filtros_estado">
+        <item>Todos</item>
+        <item>Pendiente</item>
+        <item>En proceso</item>
+        <item>Solucionado</item>
+    </string-array>
+    c
+</resources>

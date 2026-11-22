@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="← Volver"
+            style="@style/Rampify.Link" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Configuración de la cuenta"
+            style="@style/Rampify.Title" />
+
+        <TextView
+            android:id="@+id/tvCorreoActual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Correo: usuario@correo.com"
+            style="@style/Rampify.Subtitle" />
+
+        <!-- Opciones -->
+        <TextView
+            android:id="@+id/opCambiarCorreo"
+            android:text="Cambiar correo"
+            style="@style/Rampify.MenuItem" />
+
+        <!-- Formulario correo (oculto) -->
+        <LinearLayout
+            android:id="@+id/formCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/etNuevoCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nuevo correo"
+                android:inputType="textEmailAddress"
+                style="@style/Rampify.EditText" />
+
+            <Button
+                android:id="@+id/btnGuardarCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Guardar correo"
+                style="@style/Widget.Rampify.Button.Action" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/opCambiarPassword"
+            android:text="Cambiar contraseña"
+            style="@style/Rampify.MenuItem" />
+
+        <!-- Formulario contraseña (oculto) -->
+        <LinearLayout
+            android:id="@+id/formPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/etPasswordActual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña actual"
+                android:inputType="textPassword"
+                style="@style/Rampify.EditText" />
+
+            <EditText
+                android:id="@+id/etPasswordNueva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Nueva contraseña (mínimo 8)"
+                android:inputType="textPassword"
+                style="@style/Rampify.EditText" />
+
+            <Button
+                android:id="@+id/btnGuardarPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Guardar contraseña"
+                style="@style/Widget.Rampify.Button.Action" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/opCerrarSesion"
+            android:text="Cerrar sesión"
+            style="@style/Rampify.MenuItem" />
+
+        <TextView
+            android:id="@+id/tvEstadoEliminacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tienes una solicitud de eliminación pendiente."
+            android:visibility="gone"
+            style="@style/Rampify.Subtitle" />
+
+        <Button
+            android:id="@+id/btnCancelarEliminacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cancelar eliminación de cuenta"
+            android:visibility="gone"
+            style="@style/Widget.Rampify.Button.Secondary" />
+
+        <Button
+            android:id="@+id/btnEliminarCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Solicitar eliminación de cuenta"
+            style="@style/Widget.Rampify.Button.Delete" />
+
+    </LinearLayout>
+</ScrollView>

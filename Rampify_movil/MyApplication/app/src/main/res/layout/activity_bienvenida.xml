@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rampify"
+            android:textColor="@color/app_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Placeholder del mapa / logo -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_logo">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Mapa de la ciudad"
+                style="@style/Rampify.Subtitle" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Da visualización al inmobiliario"
+            style="@style/Rampify.Title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Selecciona tu zona actual en la Ciudad de México y reporta el inmobiliario inexistente o defectuoso."
+            style="@style/Rampify.Subtitle" />
+
+
+        <Button
+            android:id="@+id/btnCrearCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Crear cuenta"
+            style="@style/Widget.Rampify.Button.Primary" />
+
+        <Button
+            android:id="@+id/btnYaTengoCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Ya tengo cuenta"
+            style="@style/Widget.Rampify.Button.Secondary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Al continuar aceptas nuestros Términos y Aviso de privacidad."
+            android:textSize="11sp"
+            style="@style/Rampify.Subtitle" />
+
+    </LinearLayout>
+</ScrollView>
