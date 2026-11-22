@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Denuncias de usuarios · Rampify</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <link rel="stylesheet" href="../../css/global.css"><link rel="stylesheet" href="../../css/auth.css"><link rel="stylesheet" href="../../css/app.css">
+</head>
+<body data-role="Administrador del sistema" data-page="denuncias">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand__logo" aria-hidden="true">R</div><div><div class="brand__name">Rampify</div><div class="brand__tag">Accesibilidad urbana</div></div></div>
+    <nav class="nav" data-nav aria-label="Menú principal"></nav>
+  </aside>
+  <div class="main">
+    <header class="topbar"><span class="brand__tag" style="color:var(--color-text-muted)">Panel de administración</span>
+      <div class="topbar__user"><div><strong data-user-name></strong><span class="topbar__role" data-user-role></span></div>
+        <button class="btn btn--ghost" type="button" data-action="logout">Cerrar sesión</button></div></header>
+    <main class="content">
+      <h1 class="page-title">Denuncias de usuarios</h1>
+      <div class="split">
+        <section class="card" data-form="lista">
+          <div data-alert hidden role="alert" aria-live="polite"></div>
+          <div class="inline-filter inline-filter--wrap">
+            <label for="d-estado">Estado:</label>
+            <select class="input" id="d-estado" data-filter="estado"><option value="Pendiente">Pendiente</option><option value="Atendida">Atendida</option><option value="Desestimada">Desestimada</option></select>
+            <label for="d-motivo">Motivo:</label>
+            <select class="input" id="d-motivo" data-filter="motivo"><option value="">Todos</option><option>Mal uso de la app</option><option>Incumple Términos y Condiciones</option></select>
+          </div>
+          <table class="table table--den"><thead><tr><th>Folio</th><th>Motivo</th><th>Fecha</th><th>Denunciado</th></tr></thead><tbody data-list></tbody></table>
+          <p class="field__hint" data-empty hidden style="padding:var(--sp-4)"></p>
+          <div class="pager"><button class="btn btn--ghost" type="button" data-action="prev">← Anterior</button><span data-page-info></span><button class="btn btn--ghost" type="button" data-action="next">Siguiente →</button></div>
+        </section>
+        <section class="card" data-detail hidden>
+          <h2 class="card__title">Denuncia</h2>
+          <dl class="facts" data-d="denuncia"></dl>
+          <h3 class="card__title">Usuario denunciado</h3>
+          <dl class="facts" data-d="denunciado"></dl>
+          <h3 class="card__title">Reporte denunciado</h3>
+          <dl class="facts" data-d="reporte"></dl>
+          <img class="detail__img" data-d="img" alt="Imagen del reporte denunciado" hidden>
+          <div class="map map--sm" data-d="mapa"></div>
+          <form class="detail__form" data-form="resolver" novalidate hidden>
+            <h3 class="card__title">Resolver denuncia</h3>
+            <div class="field"><label class="field__label" for="r-accion">Resolución</label>
+              <select class="input" id="r-accion" name="accion"></select>
+              <p class="field__error" data-error-for="accion" role="alert"></p></div>
+            <div class="field"><label class="field__label" for="r-comentario" data-label="comentario">Comentario (opcional, máximo 300 caracteres)</label>
+              <textarea class="input" id="r-comentario" name="comentario" rows="3" maxlength="300"></textarea>
+              <p class="field__error" data-error-for="comentario" role="alert"></p></div>
+            <div class="field" data-field="contrasena" hidden><label class="field__label" for="r-pass">Tu contraseña de administrador</label>
+              <input class="input" id="r-pass" name="contrasena" type="password" autocomplete="current-password" maxlength="64">
+              <p class="field__error" data-error-for="contrasena" role="alert"></p></div>
+            <p class="field__hint" data-d="aviso" hidden style="margin-bottom:var(--sp-4)"></p>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--primary" type="submit" data-submit>Resolver</button>
+          </form>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="../../js/config.js"></script><script src="../../js/messages.js"></script><script src="../../js/rate-limit.js"></script>
+<script src="../../js/api.js"></script><script src="../../js/app.js"></script><script src="../../js/denuncias.js"></script>
+</body>
+</html>

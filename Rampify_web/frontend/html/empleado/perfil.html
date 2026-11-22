@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi cuenta · Rampify</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="../../css/global.css"><link rel="stylesheet" href="../../css/auth.css"><link rel="stylesheet" href="../../css/app.css">
+</head>
+<body data-role="Empleado de la asociación" data-page="cuenta">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand__logo" aria-hidden="true">R</div><div><div class="brand__name">Rampify</div><div class="brand__tag">Accesibilidad urbana</div></div></div>
+    <nav class="nav" data-nav aria-label="Menú principal"></nav>
+  </aside>
+  <div class="main">
+    <header class="topbar"><span class="brand__tag" style="color:var(--color-text-muted)">Panel del empleado</span>
+      <div class="topbar__user"><div><strong data-user-name></strong><span class="topbar__role" data-user-role></span></div>
+        <button class="btn btn--ghost" type="button" data-action="logout">Cerrar sesión</button></div></header>
+    <main class="content">
+      <h1 class="page-title">Mi cuenta</h1>
+      <div style="display:grid;gap:var(--sp-4);max-width:640px">
+
+        <section class="card" data-form="datos">
+          <h2 class="card__title">Datos de la cuenta</h2>
+          <div data-alert hidden role="alert" aria-live="polite"></div>
+          <dl class="facts" data-d="facts" style="margin-bottom:0"></dl>
+        </section>
+
+        <!-- RF_17 Actualizar correo: paso 1 (correo nuevo + contraseña) y paso 2 (código) -->
+        <section class="card">
+          <h2 class="card__title">Actualizar correo</h2>
+          <form data-form="correo" novalidate>
+            <div class="field"><label class="field__label" for="c-correo">Nuevo correo electrónico</label>
+              <input class="input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="254">
+              <p class="field__error" data-error-for="correo" role="alert"></p></div>
+            <div class="field"><label class="field__label" for="c-pass">Contraseña actual</label>
+              <input class="input" id="c-pass" name="contrasena" type="password" autocomplete="current-password" maxlength="64">
+              <p class="field__error" data-error-for="contrasena" role="alert"></p></div>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--primary" type="submit" data-submit>Enviar código</button>
+          </form>
+          <form data-form="codigo" novalidate hidden>
+            <p class="field__hint" style="margin-bottom:var(--sp-4)">Enviamos un código de 6 dígitos a <strong data-d="destino"></strong>. Vence en 10 minutos.</p>
+            <div class="field"><label class="field__label" for="c-codigo">Código de verificación</label>
+              <input class="input input--code" id="c-codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······">
+              <p class="field__error" data-error-for="codigo" role="alert"></p></div>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--primary" type="submit" data-submit data-action="confirmar">Confirmar correo</button>
+            <div class="auth__resend">
+              <button type="button" class="btn-link" data-submit data-action="reenviar">Reenviar código</button>
+              <button type="button" class="btn-link" data-action="volver">Cambiar correo</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- RF_18 Actualizar contraseña -->
+        <section class="card">
+          <h2 class="card__title">Actualizar contraseña</h2>
+          <form data-form="contrasena" novalidate>
+            <div class="field"><label class="field__label" for="p-actual">Contraseña actual</label>
+              <input class="input" id="p-actual" name="actual" type="password" autocomplete="current-password" maxlength="64">
+              <p class="field__error" data-error-for="actual" role="alert"></p></div>
+            <div class="field"><label class="field__label" for="p-nueva">Nueva contraseña</label>
+              <input class="input" id="p-nueva" name="nueva" type="password" autocomplete="new-password" maxlength="64">
+              <p class="field__hint">De 8 a 64 caracteres, con al menos 1 mayúscula, 1 minúscula y 1 número.</p>
+              <p class="field__error" data-error-for="nueva" role="alert"></p></div>
+            <div class="field"><label class="field__label" for="p-confirmacion">Confirmar nueva contraseña</label>
+              <input class="input" id="p-confirmacion" name="confirmacion" type="password" autocomplete="new-password" maxlength="64">
+              <p class="field__error" data-error-for="confirmacion" role="alert"></p></div>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--primary" type="submit" data-submit>Guardar cambios</button>
+          </form>
+        </section>
+
+        <!-- RF_15 Eliminar cuenta · RF_16 Cancelar eliminación -->
+        <section class="card">
+          <h2 class="card__title">Eliminar cuenta</h2>
+          <form data-form="eliminar" novalidate>
+            <p class="field__hint" style="margin-bottom:var(--sp-4)">La eliminación se ejecuta a los 30 días. Mientras tanto tu cuenta sigue activa y puedes cancelarla. Al llegar la fecha se borran para siempre tu nombre, correo y contraseña; los reportes se conservan sin datos personales.</p>
+            <div class="field"><label class="field__label" for="x-pass">Contraseña actual</label>
+              <input class="input" id="x-pass" name="contrasena" type="password" autocomplete="current-password" maxlength="64">
+              <p class="field__error" data-error-for="contrasena" role="alert"></p></div>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--danger" type="submit" data-submit>Eliminar cuenta</button>
+          </form>
+          <form data-form="cancelar" novalidate hidden>
+            <p style="margin-bottom:var(--sp-4)">Tu cuenta se eliminará el <strong data-d="fecha"></strong>. Hasta entonces sigue activa.</p>
+            <div data-alert hidden role="alert" aria-live="polite"></div>
+            <button class="btn btn--primary" type="submit" data-submit>Cancelar eliminación</button>
+          </form>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+<script src="../../js/config.js"></script><script src="../../js/messages.js"></script><script src="../../js/rate-limit.js"></script>
+<script src="../../js/api.js"></script><script src="../../js/validators.js"></script><script src="../../js/app.js"></script><script src="../../js/perfil.js"></script>
+</body>
+</html>

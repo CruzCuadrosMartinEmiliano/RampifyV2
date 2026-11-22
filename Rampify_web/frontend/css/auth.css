@@ -1,0 +1,50 @@
+/* ===== RAMPIFY · auth.css — login, recuperación y registros ===== */
+.auth{min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+
+/* Panel de marca (izquierda) */
+.auth__brand{position:relative;overflow:hidden;background:var(--green-900);color:var(--white);display:flex;flex-direction:column;
+  justify-content:space-between;padding:var(--sp-6) clamp(2rem,6vw,6.5rem)}
+.auth__brand::before,.auth__brand::after{content:"";position:absolute;border:1px solid rgb(197 219 212/.14);border-radius:50%;pointer-events:none}
+.auth__brand::before{width:52rem;height:52rem;right:-30rem;top:6rem}
+.auth__brand::after{width:40rem;height:40rem;right:-24rem;top:12rem}
+.brand{display:flex;align-items:center;gap:var(--sp-3);position:relative;z-index:1}
+.brand__logo{width:3.25rem;height:3.25rem;border-radius:var(--radius-md);background:var(--green-800);display:grid;place-items:center;font-size:1.6rem;font-weight:800}
+.brand__name{font-size:1.25rem;font-weight:800;line-height:1.1}
+.brand__tag{font-size:var(--fs-sm);color:var(--green-200)}
+.auth__hero{position:relative;z-index:1}
+.auth__pin{width:13rem;height:13rem;margin-bottom:var(--sp-8)}
+.eyebrow{font-size:var(--fs-xs);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--sp-3)}
+.auth__brand .eyebrow{color:var(--green-200)}
+.auth__headline{font-size:var(--fs-hero);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin-bottom:var(--sp-5)}
+.auth__headline span{display:block;color:var(--green-200)}
+.auth__lead{max-width:30rem;color:var(--green-100);line-height:1.8}
+.auth__status{position:relative;z-index:1;display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--green-200);
+  border-top:1px solid rgb(197 219 212/.2);padding-top:var(--sp-4)}
+.auth__status::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--green-600)}
+
+/* Panel de formulario (derecha) */
+.auth__panel{display:flex;flex-direction:column;justify-content:center;padding:var(--sp-6) clamp(1.5rem,6vw,7rem)}
+.auth__content{width:100%;max-width:34rem;margin:0 auto}
+.title{font-size:var(--fs-2xl);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:var(--sp-3)}
+.subtitle{color:var(--color-text-muted);margin-bottom:var(--sp-6)}
+.view__icon{width:4.3rem;height:4.3rem;border-radius:var(--radius-md);background:var(--green-100);color:var(--green-700);display:grid;place-items:center;margin-bottom:var(--sp-4)}
+.view__back{display:inline-flex;gap:var(--sp-2);margin-bottom:var(--sp-5)}
+.auth__links{display:flex;flex-direction:column;gap:var(--sp-2);margin-top:var(--sp-5);font-size:var(--fs-sm)}
+.auth__links a{color:var(--color-text)}
+.auth__resend{display:flex;justify-content:center;margin:var(--sp-4) 0 var(--sp-3)}
+.auth__footer{max-width:34rem;width:100%;margin:var(--sp-8) auto 0;display:flex;justify-content:space-between;gap:var(--sp-3);font-size:var(--fs-xs);color:var(--color-text-muted)}
+
+@media (max-width:900px){
+  .auth{grid-template-columns:1fr}
+  .auth__brand{padding:var(--sp-4) var(--sp-5)}
+  .auth__hero,.auth__status{display:none}
+  .auth__panel{padding:var(--sp-6) var(--sp-5)}
+}
+
+/* Descarga de la app y casillas */
+.stores{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
+.store{display:flex;flex-direction:column;gap:2px;padding:var(--sp-3) var(--sp-4);border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);text-decoration:none;font-weight:700}
+.store small{font-weight:600;color:var(--color-text-muted)}
+.store[aria-disabled="true"]{opacity:.6;pointer-events:none}
+.check{display:flex;gap:var(--sp-3);align-items:flex-start;font-size:var(--fs-sm)}
+.check input{width:1.15rem;height:1.15rem;margin-top:.15rem;accent-color:var(--green-700)}
