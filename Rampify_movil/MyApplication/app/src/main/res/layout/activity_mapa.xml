@@ -33,26 +33,10 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- FUTURO: aquí se reemplaza por el MapView de la API -->
-        <FrameLayout
-            android:id="@+id/contenedorMapa"
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapa"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/app_surface_variant">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Aquí irá el mapa"
-                style="@style/Rampify.Subtitle" />
-
-            <!-- Capa donde se dibujan los reportes cercanos -->
-            <FrameLayout
-                android:id="@+id/capaPines"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
+            android:layout_height="match_parent" />
 
         <!-- Botón y tarjeta flotantes abajo -->
         <LinearLayout

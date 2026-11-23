@@ -68,6 +68,81 @@ public class ApiClient {
         database.clearSession();
     }
 
+    public void nearbyReports(double latitude, double longitude, Callback callback) {
+        get("/api/v1/reportes/cercanos?latitud=" + latitude + "&longitud=" + longitude, callback);
+    }
+
+    public void problemTypes(Callback callback) {
+        get("/api/v1/catalogos/tipos-problema", callback);
+    }
+
+    public void reportHistory(int page, Callback callback) {
+        get("/api/v1/reportes/historial?pagina=" + page, callback);
+    }
+
+    public void reportDetail(int reportId, Callback callback) {
+        get("/api/v1/reportes/" + reportId, callback);
+    }
+
+    public void requestReportDeletion(int reportId, String reason, Callback callback) {
+        JSONObject body = new JSONObject();
+        try {
+            body.put("motivo", reason);
+        } catch (Exception exception) {
+            callback.onComplete(false, 0, new JSONObject());
+            return;
+        }
+        post("/api/v1/reportes/" + reportId + "/solicitud-eliminacion", body, callback);
+    }
+
+    public void createReport(int typeId, String description, double latitude, double longitude,
+                             String base64Image, Callback callback) {
+        JSONObject body = new JSONObject();
+        try {
+            body.put("id_tipo_problema", typeId);
+            body.put("descripcion", description);
+            body.put("latitud", latitude);
+            body.put("longitud", longitude);
+            body.put("imagen_tipo", "image/jpeg");
+            body.put("imagen_base64", "data:image/jpeg;base64," + base64Image);
+        } catch (Exception exception) {
+            callback.onComplete(false, 0, new JSONObject());
+            return;
+        }
+        post("/api/v1/reportes", body, callback);
+    }
+
+    private void get(String path, Callback callback) {
+        executor.execute(() -> {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(BuildConfig.API_BASE_URL + path);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(15000);
+                connection.setReadTimeout(15000);
+                String token = database.getToken();
+                if (!token.isEmpty()) {
+                    connection.setRequestProperty("Authorization", "Bearer " + token);
+                }
+                int status = connection.getResponseCode();
+                InputStream stream = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
+                String response = read(stream);
+                JSONObject data;
+                try {
+                    data = new JSONObject(response);
+                } catch (Exception exception) {
+                    data = new JSONObject();
+                }
+                callback.onComplete(status >= 200 && status < 300, status, data);
+            } catch (Exception exception) {
+                callback.onComplete(false, 0, new JSONObject());
+            } finally {
+                if (connection != null) connection.disconnect();
+            }
+        });
+    }
+
     private void post(String path, JSONObject body, Callback callback) {
         executor.execute(() -> {
             HttpURLConnection connection = null;
@@ -78,6 +153,10 @@ public class ApiClient {
                 connection.setConnectTimeout(15000);
                 connection.setReadTimeout(15000);
                 connection.setRequestProperty("Content-Type", "application/json");
+                String token = database.getToken();
+                if (!token.isEmpty()) {
+                    connection.setRequestProperty("Authorization", "Bearer " + token);
+                }
                 connection.setDoOutput(true);
                 try (OutputStream output = connection.getOutputStream()) {
                     output.write(body.toString().getBytes(StandardCharsets.UTF_8));

@@ -20,7 +20,11 @@
         <item>Todos</item>
         <item>Pendiente</item>
         <item>En proceso</item>
-        <item>Solucionado</item>
+        <item>Rechazado</item>
+    </string-array>
+    <string-array name="origen_reportes">
+        <item>Mis reportes</item>
+        <item>Otros reportes</item>
     </string-array>
     c
 </resources>

@@ -85,16 +85,26 @@ public class SolicitudEliminacionActivity extends AppCompatActivity {
         RadioButton elegido = findViewById(rgMotivo.getCheckedRadioButtonId());
         String motivo = elegido.getText().toString();
         String comentario = etComentario.getText().toString().trim();
-        if (reporte != null) {
-            new SolicitudRepository(this)
-                    .solicitarEliminacionReporte(reporte, motivo, comentario);
-        }
-
-        Toast.makeText(this, "Solicitud enviada", Toast.LENGTH_LONG).show();
-
-        Intent intent = new Intent(this, HistorialActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        finish();
+        if (reporte == null) return;
+        String razon = motivo;
+        if (!comentario.isEmpty()) razon += ": " + comentario;
+        btnEnviar.setEnabled(false);
+        new ApiClient(this).requestReportDeletion(reporte.getServerId(), razon, (ok, status, data) ->
+                runOnUiThread(() -> {
+                    btnEnviar.setEnabled(true);
+                    if (!ok) {
+                        Toast.makeText(this, status == 0
+                                ? "No fue posible conectar con el servidor"
+                                : "No se pudo enviar la solicitud", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    new SolicitudRepository(this)
+                            .solicitarEliminacionReporte(reporte, motivo, comentario);
+                    Toast.makeText(this, "Solicitud enviada", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, HistorialActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
+                }));
     }
 }
