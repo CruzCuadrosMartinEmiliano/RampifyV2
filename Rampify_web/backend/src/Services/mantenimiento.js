@@ -1,8 +1,9 @@
 // RF_22 CA2: a las 00:00 (America/Mexico_City) de la fecha de término, la cuenta suspendida vuelve a Activa
 const db = require('../DB/database');
 async function reactivarSuspensiones() {
-  const [r] = await db.query(`UPDATE usuario u JOIN sancion_cuenta s ON s.id_usuario = u.id_usuario
-      SET u.id_estado_cuenta = 1 WHERE s.activa = 1 AND s.tipo = 'Suspensión' AND s.fecha_fin <= NOW() AND u.id_estado_cuenta = 3`);
+  const [r] = await db.query(`UPDATE usuario u SET id_estado_cuenta = 1
+      FROM sancion_cuenta s
+     WHERE s.id_usuario = u.id_usuario AND s.activa = 1 AND s.tipo = 'Suspensión' AND s.fecha_fin <= NOW() AND u.id_estado_cuenta = 3`);
   await db.query(`UPDATE sancion_cuenta SET activa = 0 WHERE activa = 1 AND tipo = 'Suspensión' AND fecha_fin <= NOW()`);
   if (r.affectedRows) console.log(`Cuentas reactivadas tras suspensión: ${r.affectedRows}`);
 }
