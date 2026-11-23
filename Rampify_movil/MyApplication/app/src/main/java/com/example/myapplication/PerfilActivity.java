@@ -29,9 +29,9 @@ public class PerfilActivity extends AppCompatActivity {
         MenuInferior.configurar(this, MenuInferior.PERFIL);
 
         String nombre = getIntent().getStringExtra("nombre");
-        if (nombre == null || nombre.isEmpty()) {
-            nombre = new AuthRepository(this).getName();
-        }
+        String nombreSesion = new RampifyDatabase(this).getName();
+        if (nombre == null || nombre.isEmpty()) nombre = nombreSesion;
+        if (nombre == null || nombre.isEmpty()) nombre = new AuthRepository(this).getName();
         if (nombre != null && !nombre.isEmpty()) {
             tvNombrePerfil.setText(nombre);
             tvInicial.setText(nombre.substring(0, 1).toUpperCase());

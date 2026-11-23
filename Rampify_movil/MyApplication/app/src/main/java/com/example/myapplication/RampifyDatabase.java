@@ -47,6 +47,24 @@ public class RampifyDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public String getEmail() {
+        Cursor cursor = getReadableDatabase().query("session", new String[]{"email"}, "id = 1", null, null, null, null);
+        try {
+            return cursor.moveToFirst() ? cursor.getString(0) : "";
+        } finally {
+            cursor.close();
+        }
+    }
+
+    public String getName() {
+        Cursor cursor = getReadableDatabase().query("session", new String[]{"name"}, "id = 1", null, null, null, null);
+        try {
+            return cursor.moveToFirst() ? cursor.getString(0) : "";
+        } finally {
+            cursor.close();
+        }
+    }
+
     public void clearSession() {
         getWritableDatabase().delete("session", null, null);
     }
