@@ -37,7 +37,7 @@ public class ApiClient {
             callback.onComplete(false, 0, new JSONObject());
             return;
         }
-        post("/auth/login", body, (ok, status, data) -> {
+        post("/api/auth/login", body, (ok, status, data) -> {
             if (ok) {
                 try {
                     JSONObject user = data.getJSONObject("usuario");
@@ -61,7 +61,7 @@ public class ApiClient {
             callback.onComplete(false, 0, new JSONObject());
             return;
         }
-        post("/auth/registro", body, callback);
+        post("/api/auth/registro", body, callback);
     }
 
     public void logout() {
@@ -75,8 +75,8 @@ public class ApiClient {
                 URL url = new URL(BuildConfig.API_BASE_URL + path);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
-                connection.setConnectTimeout(4000);
-                connection.setReadTimeout(4000);
+                connection.setConnectTimeout(15000);
+                connection.setReadTimeout(15000);
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
                 try (OutputStream output = connection.getOutputStream()) {
@@ -85,7 +85,13 @@ public class ApiClient {
                 int status = connection.getResponseCode();
                 InputStream stream = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
                 String response = read(stream);
-                callback.onComplete(status >= 200 && status < 300, status, new JSONObject(response));
+                JSONObject data;
+                try {
+                    data = new JSONObject(response);
+                } catch (Exception exception) {
+                    data = new JSONObject();
+                }
+                callback.onComplete(status >= 200 && status < 300, status, data);
             } catch (Exception exception) {
                 callback.onComplete(false, 0, new JSONObject());
             } finally {
