@@ -37,7 +37,7 @@ public class ApiClient {
             callback.onComplete(false, 0, new JSONObject());
             return;
         }
-        post("/api/auth/login", body, (ok, status, data) -> {
+        post("/api/v1/auth/login", body, (ok, status, data) -> {
             if (ok) {
                 try {
                     JSONObject user = data.getJSONObject("usuario");
@@ -61,7 +61,7 @@ public class ApiClient {
             callback.onComplete(false, 0, new JSONObject());
             return;
         }
-        post("/api/auth/registro", body, callback);
+        post("/api/v1/auth/registro", body, callback);
     }
 
     public void logout() {
