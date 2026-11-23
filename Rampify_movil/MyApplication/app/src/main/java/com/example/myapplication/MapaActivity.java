@@ -18,7 +18,8 @@ import androidx.core.content.ContextCompat;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
+import org.osmdroid.util.MapTileIndex;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
@@ -47,7 +48,9 @@ public class MapaActivity extends AppCompatActivity {
 
         Configuration.getInstance().load(this,
                 getSharedPreferences("osmdroid", MODE_PRIVATE));
-        Configuration.getInstance().setUserAgentValue(getPackageName());
+        Configuration.getInstance().setUserAgentValue(
+                "RampifyV2/1.0 (Android)");
+        Configuration.getInstance().setUserAgentHttpHeader("User-Agent");
 
         mapa = findViewById(R.id.mapa);
         cardReporte = findViewById(R.id.cardReporte);
@@ -58,7 +61,24 @@ public class MapaActivity extends AppCompatActivity {
         btnVerDetalle = findViewById(R.id.btnVerDetalle);
         btnNuevoReporte = findViewById(R.id.btnNuevoReporte);
 
-        mapa.setTileSource(TileSourceFactory.MAPNIK);
+        mapa.setTileSource(new OnlineTileSourceBase(
+                "Esri World Street",
+                0,
+                20,
+                256,
+                "",
+                new String[]{
+                        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/"
+                },
+                "Tiles © Esri © OpenStreetMap contributors") {
+            @Override
+            public String getTileURLString(long tileIndex) {
+                return getBaseUrl()
+                        + MapTileIndex.getZoom(tileIndex) + "/"
+                        + MapTileIndex.getY(tileIndex) + "/"
+                        + MapTileIndex.getX(tileIndex);
+            }
+        });
         mapa.setMultiTouchControls(true);
         mapa.getController().setZoom(13.0);
         mapa.getController().setCenter(new GeoPoint(CDMX_LATITUDE, CDMX_LONGITUDE));
