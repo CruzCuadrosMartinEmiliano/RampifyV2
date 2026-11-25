@@ -54,6 +54,10 @@ public class RegistroActivity extends AppCompatActivity {
                                 finish();
                             } else if (status == 409) {
                                 etCorreo.setError("El correo ya se encuentra registrado");
+                            } else if (status == 404) {
+                                Toast.makeText(RegistroActivity.this,
+                                        "El registro no está disponible en el servidor",
+                                        Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(RegistroActivity.this, status == 0 ? "No fue posible conectar con el servidor" : "No se pudo crear la cuenta", Toast.LENGTH_LONG).show();
                             }

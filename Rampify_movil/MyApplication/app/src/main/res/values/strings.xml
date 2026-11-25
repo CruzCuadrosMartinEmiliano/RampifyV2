@@ -20,7 +20,7 @@
         <item>Todos</item>
         <item>Pendiente</item>
         <item>En proceso</item>
-        <item>Solucionado</item>
+        <item>Rechazado</item>
     </string-array>
     c
 </resources>

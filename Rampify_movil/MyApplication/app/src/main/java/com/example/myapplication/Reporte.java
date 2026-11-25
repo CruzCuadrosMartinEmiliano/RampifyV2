@@ -8,9 +8,42 @@ public class Reporte implements Parcelable {
     public static final String PENDIENTE = "Pendiente";
     public static final String EN_PROCESO = "En proceso";
     public static final String SOLUCIONADO = "Solucionado";
+    public static final String RECHAZADO = "Rechazado";
 
     private final String folio, tipo, descripcion, estado, direccion, fecha, zona, fotoUri;
     private final double lat, lng;
+    private final int serverId;
+    private final boolean ownReport;
+
+    public static Reporte cercano(int serverId, String folio, String tipo, String descripcion,
+                                  String estado, String fecha, double lat, double lng) {
+        return new Reporte(serverId, folio, tipo, descripcion, estado,
+                "Ubicación reportada", fecha, "Ciudad de México", lat, lng, null, false);
+    }
+
+    public Reporte(int serverId, String folio, String tipo, String descripcion, String estado,
+                   String direccion, String fecha, String zona, double lat, double lng,
+                   String fotoUri) {
+        this(serverId, folio, tipo, descripcion, estado, direccion, fecha, zona,
+                lat, lng, fotoUri, true);
+    }
+
+    public Reporte(int serverId, String folio, String tipo, String descripcion, String estado,
+                   String direccion, String fecha, String zona, double lat, double lng,
+                   String fotoUri, boolean ownReport) {
+        this.serverId = serverId;
+        this.ownReport = ownReport;
+        this.folio = folio;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.zona = zona;
+        this.lat = lat;
+        this.lng = lng;
+        this.fotoUri = fotoUri;
+    }
 
     public Reporte(String folio, String tipo, String descripcion, String estado,
                    String direccion, String fecha, String zona, double lat, double lng) {
@@ -20,6 +53,8 @@ public class Reporte implements Parcelable {
     public Reporte(String folio, String tipo, String descripcion, String estado,
                    String direccion, String fecha, String zona, double lat, double lng,
                    String fotoUri) {
+        this.serverId = 0;
+        this.ownReport = true;
         this.folio = folio;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -42,9 +77,13 @@ public class Reporte implements Parcelable {
     public double getLat() { return lat; }
     public double getLng() { return lng; }
     public String getFotoUri() { return fotoUri; }
+    public int getServerId() { return serverId; }
+    public boolean isOwnReport() { return ownReport; }
 
     // ----- Parcelable -----
     protected Reporte(Parcel in) {
+        serverId = in.readInt();
+        ownReport = in.readByte() != 0;
         folio = in.readString();
         tipo = in.readString();
         descripcion = in.readString();
@@ -59,6 +98,8 @@ public class Reporte implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(serverId);
+        dest.writeByte((byte) (ownReport ? 1 : 0));
         dest.writeString(folio);
         dest.writeString(tipo);
         dest.writeString(descripcion);

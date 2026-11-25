@@ -12,6 +12,8 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import org.json.JSONObject;
+
 public class DetalleReporteActivity extends AppCompatActivity {
 
     private TextView tvVolver, tvTipo, tvEstado, tvFolio, tvDireccion, tvFecha, tvDescripcion;
@@ -44,6 +46,8 @@ public class DetalleReporteActivity extends AppCompatActivity {
         }
 
         mostrarDatos();
+        if (reporte.isOwnReport()) cargarDetalleServidor();
+        if (!reporte.isOwnReport()) btnSolicitarEliminacion.setVisibility(View.GONE);
 
         tvVolver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,5 +89,28 @@ public class DetalleReporteActivity extends AppCompatActivity {
         }
         tvEstado.setBackgroundResource(fondo);
         tvEstado.setTextColor(ContextCompat.getColor(this, texto));
+    }
+
+    private void cargarDetalleServidor() {
+        if (reporte.getServerId() <= 0) return;
+        new ApiClient(this).reportDetail(reporte.getServerId(), (ok, status, data) ->
+                runOnUiThread(() -> {
+                    if (!ok) return;
+                    JSONObject detalle = data.optJSONObject("reporte");
+                    if (detalle == null) return;
+                    reporte = new Reporte(
+                            reporte.getServerId(),
+                            detalle.optString("folio", reporte.getFolio()),
+                            detalle.optString("tipo", reporte.getTipo()),
+                            detalle.optString("descripcion", reporte.getDescripcion()),
+                            detalle.optString("estado", reporte.getEstado()),
+                            detalle.optString("direccion", "Ubicación reportada"),
+                            detalle.optString("fecha", reporte.getFecha()),
+                            "Ciudad de México",
+                            detalle.optDouble("latitud", reporte.getLat()),
+                            detalle.optDouble("longitud", reporte.getLng()),
+                            reporte.getFotoUri());
+                    mostrarDatos();
+                }));
     }
 }

@@ -45,7 +45,9 @@ public class CuentaActivity extends AppCompatActivity {
         btnCancelarEliminacion = findViewById(R.id.btnCancelarEliminacion);
         tvEstadoEliminacion = findViewById(R.id.tvEstadoEliminacion);
         authRepository = new AuthRepository(this);
-        tvCorreoActual.setText("Correo: " + authRepository.getEmail());
+        String correoSesion = new RampifyDatabase(this).getEmail();
+        tvCorreoActual.setText("Correo: " + (correoSesion.isEmpty()
+                ? authRepository.getEmail() : correoSesion));
         actualizarEstadoEliminacion();
 
         tvVolver.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +125,7 @@ public class CuentaActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 authRepository.logout();
+                                new ApiClient(CuentaActivity.this).logout();
                                 irABienvenida();
                             }
                         });
@@ -140,6 +143,7 @@ public class CuentaActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 authRepository.requestAccountDeletion();
                                 authRepository.logout();
+                                new ApiClient(CuentaActivity.this).logout();
                                 Toast.makeText(CuentaActivity.this,
                                         "Solicitud enviada", Toast.LENGTH_LONG).show();
                                 irABienvenida();

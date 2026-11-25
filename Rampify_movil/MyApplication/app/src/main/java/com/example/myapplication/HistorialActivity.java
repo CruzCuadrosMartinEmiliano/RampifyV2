@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,41 @@ public class HistorialActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        sincronizarHistorial();
+    }
+
+    private void sincronizarHistorial() {
+        sincronizarPagina(1, new JSONArray());
+    }
+
+    private void sincronizarPagina(int pagina, JSONArray acumulados) {
+        new ApiClient(this).reportHistory(pagina, (ok, status, data) -> runOnUiThread(() -> {
+            if (!ok) {
+                recargarDesdeCache();
+                return;
+            }
+            JSONArray reportes = data.optJSONArray("reportes");
+            if (reportes != null) {
+                for (int i = 0; i < reportes.length(); i++) {
+                    JSONObject reporte = reportes.optJSONObject(i);
+                    if (reporte != null) acumulados.put(reporte);
+                }
+            }
+            int paginas = Math.max(data.optInt("paginas", 1), 1);
+            if (pagina < paginas) {
+                sincronizarPagina(pagina + 1, acumulados);
+            } else {
+                new ReporteRepository(this).sincronizar(acumulados);
+                recargarDesdeCache();
+            }
+        }));
+    }
+
+    private void recargarDesdeCache() {
+        todos.clear();
+        todos.addAll(new ReporteRepository(this).obtenerTodos());
+        filtrar(spFiltro.getSelectedItem().toString());
     }
 
     private void filtrar(String estado) {
@@ -76,9 +113,8 @@ public class HistorialActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (todos != null) {
-            todos.clear();
-            todos.addAll(new ReporteRepository(this).obtenerTodos());
-            filtrar(spFiltro.getSelectedItem().toString());
+            recargarDesdeCache();
+            sincronizarHistorial();
         }
     }
 }
