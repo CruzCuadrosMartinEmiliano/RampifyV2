@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.os.LocaleListCompat;
 
 public class CuentaActivity extends AppCompatActivity {
 
@@ -23,11 +27,25 @@ public class CuentaActivity extends AppCompatActivity {
     private Button btnCancelarEliminacion;
     private TextView tvEstadoEliminacion;
     private AuthRepository authRepository;
+    private RadioGroup rgIdioma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuenta);
+
+        rgIdioma = findViewById(R.id.rgIdioma);
+        SharedPreferences preferences = getSharedPreferences("ajustes", MODE_PRIVATE);
+        String language = preferences.getString("idioma", "es");
+        rgIdioma.check("en".equals(language) ? R.id.rbIdiomaIngles : R.id.rbIdiomaEspanol);
+        rgIdioma.setOnCheckedChangeListener((group, checkedId) -> {
+            String selectedLanguage = checkedId == R.id.rbIdiomaIngles ? "en" : "es";
+            if (!selectedLanguage.equals(preferences.getString("idioma", "es"))) {
+                preferences.edit().putString("idioma", selectedLanguage).apply();
+                AppCompatDelegate.setApplicationLocales(
+                        LocaleListCompat.forLanguageTags(selectedLanguage));
+            }
+        });
 
         tvVolver = findViewById(R.id.tvVolver);
         tvCorreoActual = findViewById(R.id.tvCorreoActual);
@@ -46,7 +64,7 @@ public class CuentaActivity extends AppCompatActivity {
         tvEstadoEliminacion = findViewById(R.id.tvEstadoEliminacion);
         authRepository = new AuthRepository(this);
         String correoSesion = new RampifyDatabase(this).getEmail();
-        tvCorreoActual.setText("Correo: " + (correoSesion.isEmpty()
+        tvCorreoActual.setText(getString(R.string.current_email, correoSesion.isEmpty()
                 ? authRepository.getEmail() : correoSesion));
         actualizarEstadoEliminacion();
 
@@ -78,18 +96,18 @@ public class CuentaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String correo = etNuevoCorreo.getText().toString().trim();
                 if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-                    etNuevoCorreo.setError("Correo no válido (ej. nombre@correo.com)");
+                    etNuevoCorreo.setError(getString(R.string.invalid_email));
                     return;
                 }
                 if (!authRepository.updateEmail(correo)) {
                     Toast.makeText(CuentaActivity.this,
-                            "No se pudo actualizar el correo", Toast.LENGTH_SHORT).show();
+                            getString(R.string.email_update_failed), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                tvCorreoActual.setText("Correo: " + correo);
+                tvCorreoActual.setText(getString(R.string.current_email, correo));
                 etNuevoCorreo.setText("");
                 formCorreo.setVisibility(View.GONE);
-                Toast.makeText(CuentaActivity.this, "Correo actualizado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CuentaActivity.this, R.string.email_updated, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,28 +117,29 @@ public class CuentaActivity extends AppCompatActivity {
                 String actual = etPasswordActual.getText().toString().trim();
                 String nueva = etPasswordNueva.getText().toString().trim();
                 if (actual.isEmpty()) {
-                    etPasswordActual.setError("Escribe tu contraseña actual");
+                    etPasswordActual.setError(getString(R.string.current_password_required));
                     return;
                 }
                 if (!nueva.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,64}$")) {
-                    etPasswordNueva.setError("Usa 8-64 caracteres, mayúscula, minúscula y número");
+                    etPasswordNueva.setError(getString(R.string.password_requirements));
                     return;
                 }
                 if (!authRepository.updatePassword(actual, nueva)) {
-                    etPasswordActual.setError("La contraseña actual no es correcta");
+                    etPasswordActual.setError(getString(R.string.incorrect_current_password));
                     return;
                 }
                 etPasswordActual.setText("");
                 etPasswordNueva.setText("");
                 formPassword.setVisibility(View.GONE);
-                Toast.makeText(CuentaActivity.this, "Contraseña actualizada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CuentaActivity.this, R.string.password_updated, Toast.LENGTH_SHORT).show();
             }
         });
 
         opCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmar("¿Cerrar sesión?", "Volverás a la pantalla de inicio.", "Cerrar sesión",
+                confirmar(getString(R.string.logout_title), getString(R.string.logout_message),
+                        getString(R.string.logout),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -135,9 +154,9 @@ public class CuentaActivity extends AppCompatActivity {
         btnEliminarCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmar("¿Solicitar eliminación de cuenta?",
-                        "Tu solicitud será revisada. Tus reportes se conservan como evidencia.",
-                        "Solicitar",
+                confirmar(getString(R.string.delete_account_title),
+                        getString(R.string.delete_account_message),
+                        getString(R.string.request),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -145,7 +164,7 @@ public class CuentaActivity extends AppCompatActivity {
                                 authRepository.logout();
                                 new ApiClient(CuentaActivity.this).logout();
                                 Toast.makeText(CuentaActivity.this,
-                                        "Solicitud enviada", Toast.LENGTH_LONG).show();
+                                        getString(R.string.request_sent), Toast.LENGTH_LONG).show();
                                 irABienvenida();
                             }
                         });
@@ -158,7 +177,7 @@ public class CuentaActivity extends AppCompatActivity {
                         authRepository.cancelAccountDeletion();
                         actualizarEstadoEliminacion();
                         Toast.makeText(CuentaActivity.this,
-                                "Solicitud de eliminación cancelada", Toast.LENGTH_LONG).show();
+                                getString(R.string.deletion_request_cancelled), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -180,7 +199,7 @@ public class CuentaActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(titulo)
                 .setMessage(mensaje)
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(textoOk, accion)
                 .show();
     }

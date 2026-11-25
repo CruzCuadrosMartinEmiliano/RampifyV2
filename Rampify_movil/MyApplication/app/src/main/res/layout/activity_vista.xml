@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:text="← Volver"
+        android:text="@string/back"
         style="@style/Rampify.Link" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Configuración de vista"
+        android:text="@string/view_settings"
         style="@style/Rampify.Title" />
 
     <TextView
@@ -26,12 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Personaliza cómo se ve la aplicación."
+        android:text="@string/view_settings_intro"
         style="@style/Rampify.Subtitle" />
 
     <Switch
         android:id="@+id/swModoOscuro"
-        android:text="Modo oscuro"
+        android:text="@string/dark_mode"
         style="@style/Rampify.Switch" />
 
 </LinearLayout>

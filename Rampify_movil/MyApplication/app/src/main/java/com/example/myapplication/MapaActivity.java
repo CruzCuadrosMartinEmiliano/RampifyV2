@@ -3,6 +3,12 @@ package com.example.rampifyv1;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -12,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -30,8 +37,11 @@ import java.util.List;
 
 public class MapaActivity extends AppCompatActivity {
     private static final int LOCATION_REQUEST = 1001;
+    private static final float REPORT_CLUSTER_RADIUS_METERS = 30.0f;
     private static final double CDMX_LATITUDE = 19.4326;
     private static final double CDMX_LONGITUDE = -99.1332;
+    public static final String EXTRA_REPORT_LATITUDE = "reporte_latitud";
+    public static final String EXTRA_REPORT_LONGITUDE = "reporte_longitud";
 
     private MapView mapa;
     private LinearLayout cardReporte;
@@ -40,6 +50,9 @@ public class MapaActivity extends AppCompatActivity {
 
     private List<Reporte> todos;
     private Reporte seleccionado;
+    private Marker marcadorUbicacion;
+    private double latitude = CDMX_LATITUDE;
+    private double longitude = CDMX_LONGITUDE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +94,7 @@ public class MapaActivity extends AppCompatActivity {
         });
         mapa.setMultiTouchControls(true);
         mapa.getController().setZoom(13.0);
-        mapa.getController().setCenter(new GeoPoint(CDMX_LATITUDE, CDMX_LONGITUDE));
+        mapa.getController().setCenter(new GeoPoint(latitude, longitude));
 
         todos = new ArrayList<>();
         MenuInferior.configurar(this, MenuInferior.MAPA);
@@ -94,14 +107,32 @@ public class MapaActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        solicitarUbicacionYCargarReportes();
+        if (getIntent().hasExtra(EXTRA_REPORT_LATITUDE)
+                && getIntent().hasExtra(EXTRA_REPORT_LONGITUDE)) {
+            actualizarUbicacion(getIntent().getDoubleExtra(EXTRA_REPORT_LATITUDE, CDMX_LATITUDE),
+                    getIntent().getDoubleExtra(EXTRA_REPORT_LONGITUDE, CDMX_LONGITUDE));
+            cargarReportesDesdeServidor(latitude, longitude);
+        } else {
+            solicitarUbicacionYCargarReportes();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (mapa != null) mapa.onResume();
-        cargarReportesDesdeServidor(CDMX_LATITUDE, CDMX_LONGITUDE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent.hasExtra(EXTRA_REPORT_LATITUDE)
+                && intent.hasExtra(EXTRA_REPORT_LONGITUDE)) {
+            actualizarUbicacion(intent.getDoubleExtra(EXTRA_REPORT_LATITUDE, CDMX_LATITUDE),
+                    intent.getDoubleExtra(EXTRA_REPORT_LONGITUDE, CDMX_LONGITUDE));
+            cargarReportesDesdeServidor(latitude, longitude);
+        }
     }
 
     @Override
@@ -128,29 +159,35 @@ public class MapaActivity extends AppCompatActivity {
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             cargarUltimaUbicacion();
         } else {
-            cargarReportesDesdeServidor(CDMX_LATITUDE, CDMX_LONGITUDE);
+            cargarReportesDesdeServidor(latitude, longitude);
         }
     }
 
     private void cargarUltimaUbicacion() {
-        double latitude = CDMX_LATITUDE;
-        double longitude = CDMX_LONGITUDE;
+        double currentLatitude = CDMX_LATITUDE;
+        double currentLongitude = CDMX_LONGITUDE;
         try {
             LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
             if (manager != null) {
                 for (String provider : manager.getProviders(true)) {
                     Location location = manager.getLastKnownLocation(provider);
                     if (location != null) {
-                        latitude = location.getLatitude();
-                        longitude = location.getLongitude();
+                        currentLatitude = location.getLatitude();
+                        currentLongitude = location.getLongitude();
                         break;
                     }
                 }
             }
         } catch (SecurityException ignored) {
         }
-        mapa.getController().setCenter(new GeoPoint(latitude, longitude));
+        actualizarUbicacion(currentLatitude, currentLongitude);
         cargarReportesDesdeServidor(latitude, longitude);
+    }
+
+    private void actualizarUbicacion(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        mapa.getController().setCenter(new GeoPoint(latitude, longitude));
     }
 
     private void cargarReportesDesdeServidor(double latitude, double longitude) {
@@ -158,8 +195,8 @@ public class MapaActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (!ok) {
                         Toast.makeText(this, status == 0
-                                ? "No fue posible cargar los reportes"
-                                : "No se pudieron cargar los reportes", Toast.LENGTH_SHORT).show();
+                                ? getString(R.string.reports_connection_failed)
+                                : getString(R.string.reports_load_failed), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     dibujarReportes(data.optJSONArray("reportes"));
@@ -171,6 +208,7 @@ public class MapaActivity extends AppCompatActivity {
         cardReporte.setVisibility(android.view.View.GONE);
         todos = new ArrayList<>();
         if (reportes == null) {
+            agregarMarcadorUbicacion();
             mapa.invalidate();
             return;
         }
@@ -188,9 +226,9 @@ public class MapaActivity extends AppCompatActivity {
                     item.optString("tipo", "Reporte"),
                     item.optString("descripcion", ""),
                     estado,
-                    "Ubicación reportada",
+                    getString(R.string.report_location),
                     item.optString("fecha", ""),
-                    "Ciudad de México",
+                    getString(R.string.mexico_city),
                     lat,
                     lng);
             todos.add(reporte);
@@ -202,21 +240,118 @@ public class MapaActivity extends AppCompatActivity {
             circulo.setStrokeColor(colorContorno(estado, false));
             circulo.setStrokeWidth(4.0f);
             mapa.getOverlays().add(circulo);
+        }
+        for (List<Reporte> grupo : agruparReportesCercanos()) {
+            agregarMarcadorGrupo(grupo);
+        }
+        agregarMarcadorUbicacion();
+        mapa.invalidate();
+    }
 
-            Marker marcador = new Marker(mapa);
-            marcador.setPosition(punto);
-            marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+    private List<List<Reporte>> agruparReportesCercanos() {
+        List<List<Reporte>> grupos = new ArrayList<>();
+        for (Reporte reporte : todos) {
+            List<Reporte> grupoCercano = null;
+            for (List<Reporte> grupo : grupos) {
+                Reporte referencia = grupo.get(0);
+                float[] distancia = new float[1];
+                Location.distanceBetween(reporte.getLat(), reporte.getLng(),
+                        referencia.getLat(), referencia.getLng(), distancia);
+                if (distancia[0] <= REPORT_CLUSTER_RADIUS_METERS) {
+                    grupoCercano = grupo;
+                    break;
+                }
+            }
+            if (grupoCercano == null) {
+                grupoCercano = new ArrayList<>();
+                grupos.add(grupoCercano);
+            }
+            grupoCercano.add(reporte);
+        }
+        return grupos;
+    }
+
+    private void agregarMarcadorGrupo(List<Reporte> grupo) {
+        double centerLatitude = 0;
+        double centerLongitude = 0;
+        for (Reporte reporte : grupo) {
+            centerLatitude += reporte.getLat();
+            centerLongitude += reporte.getLng();
+        }
+        GeoPoint centro = new GeoPoint(centerLatitude / grupo.size(),
+                centerLongitude / grupo.size());
+
+        Marker marcador = new Marker(mapa);
+        marcador.setPosition(centro);
+        marcador.setAnchor(Marker.ANCHOR_CENTER,
+                grupo.size() == 1 ? Marker.ANCHOR_BOTTOM : Marker.ANCHOR_CENTER);
+        if (grupo.size() == 1) {
+            Reporte reporte = grupo.get(0);
             marcador.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_pin));
             marcador.setTitle(reporte.getTipo());
             marcador.setSnippet(reporte.getEstado());
-            marcador.setOnMarkerClickListener((clicked, view) -> {
-                mostrarCard(reporte);
-                mapa.getController().animateTo(punto);
-                return true;
-            });
-            mapa.getOverlays().add(marcador);
+        } else {
+            marcador.setIcon(crearIconoGrupo(grupo.size()));
+            marcador.setTitle(getString(R.string.report_cluster_title, grupo.size()));
+            marcador.setSnippet(getString(R.string.tap_to_choose_report));
         }
-        mapa.invalidate();
+        marcador.setOnMarkerClickListener((clicked, view) -> {
+            if (grupo.size() == 1) {
+                mostrarCard(grupo.get(0));
+            } else {
+                mostrarReportesDelGrupo(grupo);
+            }
+            mapa.getController().animateTo(centro);
+            return true;
+        });
+        mapa.getOverlays().add(marcador);
+    }
+
+    private Drawable crearIconoGrupo(int cantidad) {
+        float density = getResources().getDisplayMetrics().density;
+        int size = Math.round(44 * density);
+        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(android.graphics.Color.WHITE);
+        canvas.drawCircle(size / 2f, size / 2f, size / 2f - density, paint);
+
+        paint.setColor(android.graphics.Color.rgb(109, 40, 217));
+        canvas.drawCircle(size / 2f, size / 2f, size / 2f - 3 * density, paint);
+
+        String label = cantidad > 99 ? "99+" : String.valueOf(cantidad);
+        paint.setColor(android.graphics.Color.WHITE);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(16 * getResources().getDisplayMetrics().scaledDensity);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        float baseline = size / 2f - (paint.ascent() + paint.descent()) / 2f;
+        canvas.drawText(label, size / 2f, baseline, paint);
+
+        return new BitmapDrawable(getResources(), bitmap);
+    }
+
+    private void mostrarReportesDelGrupo(List<Reporte> grupo) {
+        String[] opciones = new String[grupo.size()];
+        for (int i = 0; i < grupo.size(); i++) {
+            Reporte reporte = grupo.get(i);
+            opciones[i] = reporte.getTipo() + " · " + reporte.getFolio();
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.report_cluster_title, grupo.size()))
+                .setItems(opciones, (dialog, which) -> mostrarCard(grupo.get(which)))
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void agregarMarcadorUbicacion() {
+        marcadorUbicacion = new Marker(mapa);
+        marcadorUbicacion.setPosition(new GeoPoint(latitude, longitude));
+        marcadorUbicacion.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+        marcadorUbicacion.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_my_location));
+        marcadorUbicacion.setTitle(getString(R.string.my_location));
+        marcadorUbicacion.setSnippet(getString(R.string.nearby_reports));
+        mapa.getOverlays().add(marcadorUbicacion);
     }
 
     private int colorContorno(String estado, boolean fill) {

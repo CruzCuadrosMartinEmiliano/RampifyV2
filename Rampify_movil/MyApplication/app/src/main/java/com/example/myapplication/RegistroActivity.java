@@ -49,17 +49,19 @@ public class RegistroActivity extends AppCompatActivity {
                         (ok, status, data) -> runOnUiThread(() -> {
                             btnCrearCuenta.setEnabled(true);
                             if (ok) {
-                                Toast.makeText(RegistroActivity.this, "Cuenta creada. Inicia sesión para continuar", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegistroActivity.this, R.string.account_created, Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(RegistroActivity.this, LoginActivity.class));
                                 finish();
                             } else if (status == 409) {
                                 etCorreo.setError("El correo ya se encuentra registrado");
                             } else if (status == 404) {
                                 Toast.makeText(RegistroActivity.this,
-                                        "El registro no está disponible en el servidor",
+                                        getString(R.string.registration_unavailable),
                                         Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(RegistroActivity.this, status == 0 ? "No fue posible conectar con el servidor" : "No se pudo crear la cuenta", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegistroActivity.this, status == 0
+                                        ? getString(R.string.server_unavailable)
+                                        : getString(R.string.account_create_failed), Toast.LENGTH_LONG).show();
                             }
                         }));
             }
@@ -100,16 +102,16 @@ public class RegistroActivity extends AppCompatActivity {
             etCorreo.setError("Escribe tu correo");
             valido = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            etCorreo.setError("Correo no válido (ej. nombre@correo.com)");
+            etCorreo.setError(getString(R.string.invalid_email));
             valido = false;
         }
 
         // Contraseña: mínimo 8 caracteres
         if (pass.isEmpty()) {
-            etPassword.setError("Escribe una contraseña");
+            etPassword.setError(getString(R.string.password_required));
             valido = false;
         } else if (!pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,64}$")) {
-            etPassword.setError("Usa 8-64 caracteres, mayúscula, minúscula y número");
+            etPassword.setError(getString(R.string.password_requirements));
             valido = false;
         }
 
@@ -120,7 +122,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         if (!cbPrivacidad.isChecked()) {
             Toast.makeText(this,
-                    "Debes aceptar los Términos y el Aviso de privacidad",
+                    getString(R.string.accept_privacy_terms),
                     Toast.LENGTH_SHORT).show();
             return false;
         }

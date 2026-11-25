@@ -64,7 +64,7 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(PerfilActivity.this,
-                        seccion + ": próximamente", Toast.LENGTH_SHORT).show();
+                        getString(R.string.feature_coming_soon, seccion), Toast.LENGTH_SHORT).show();
             }
         };
     }

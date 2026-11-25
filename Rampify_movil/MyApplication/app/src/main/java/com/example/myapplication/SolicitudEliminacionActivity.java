@@ -53,13 +53,13 @@ public class SolicitudEliminacionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (rgMotivo.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(SolicitudEliminacionActivity.this,
-                            "Selecciona un motivo", Toast.LENGTH_SHORT).show();
+                            getString(R.string.select_deletion_reason), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Si elige "Otro", el comentario es obligatorio
                 if (rgMotivo.getCheckedRadioButtonId() == R.id.rbOtro
                         && etComentario.getText().toString().trim().isEmpty()) {
-                    etComentario.setError("Cuéntanos el motivo");
+                    etComentario.setError(getString(R.string.tell_us_reason));
                     return;
                 }
                 confirmar();
@@ -69,9 +69,9 @@ public class SolicitudEliminacionActivity extends AppCompatActivity {
 
     private void confirmar() {
         new AlertDialog.Builder(this)
-                .setTitle("¿Enviar solicitud?")
-                .setMessage("El reporte no se borra de inmediato: la solicitud será revisada.")
-                .setNegativeButton("Volver", null)
+                .setTitle(R.string.confirm_request_title)
+                .setMessage(R.string.request_review_notice)
+                .setNegativeButton(R.string.back_button, null)
                 .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -94,13 +94,13 @@ public class SolicitudEliminacionActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(true);
                     if (!ok) {
                         Toast.makeText(this, status == 0
-                                ? "No fue posible conectar con el servidor"
-                                : "No se pudo enviar la solicitud", Toast.LENGTH_LONG).show();
+                                ? getString(R.string.server_unavailable)
+                                : getString(R.string.request_send_failed), Toast.LENGTH_LONG).show();
                         return;
                     }
                     new SolicitudRepository(this)
                             .solicitarEliminacionReporte(reporte, motivo, comentario);
-                    Toast.makeText(this, "Solicitud enviada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.request_sent, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(this, HistorialActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);

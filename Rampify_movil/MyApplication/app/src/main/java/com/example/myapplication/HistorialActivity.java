@@ -45,7 +45,7 @@ public class HistorialActivity extends AppCompatActivity {
         spFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filtrar(spFiltro.getSelectedItem().toString());
+                filtrar(position);
             }
 
             @Override
@@ -95,18 +95,33 @@ public class HistorialActivity extends AppCompatActivity {
     private void recargarDesdeCache() {
         todos.clear();
         todos.addAll(new ReporteRepository(this).obtenerTodos());
-        filtrar(spFiltro.getSelectedItem().toString());
+        filtrar(spFiltro.getSelectedItemPosition());
     }
 
-    private void filtrar(String estado) {
+    private void filtrar(int filtroSeleccionado) {
         visibles.clear();
         for (Reporte r : todos) {
-            if (estado.equals("Todos") || estado.equals(r.getEstado())) {
+            if (coincideEstadoFiltro(r.getEstado(), filtroSeleccionado)) {
                 visibles.add(r);
             }
         }
         adapter.notifyDataSetChanged();
         tvVacio.setVisibility(visibles.isEmpty() ? View.VISIBLE : View.GONE);
+    }
+
+    static boolean coincideEstadoFiltro(String estado, int filtroSeleccionado) {
+        switch (filtroSeleccionado) {
+            case 0:
+                return true;
+            case 1:
+                return Reporte.PENDIENTE.equals(estado);
+            case 2:
+                return Reporte.EN_PROCESO.equals(estado);
+            case 3:
+                return Reporte.RECHAZADO.equals(estado);
+            default:
+                return false;
+        }
     }
 
     @Override

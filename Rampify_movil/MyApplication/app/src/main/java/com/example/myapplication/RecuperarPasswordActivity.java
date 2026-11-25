@@ -33,31 +33,31 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
     private void enviarCodigo() {
         String correo = etCorreo.getText().toString().trim();
         if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            etCorreo.setError("Correo no válido");
+            etCorreo.setError(getString(R.string.invalid_email));
             return;
         }
         String code = authRepository.beginPasswordRecovery(correo);
         if (code == null) {
-            Toast.makeText(this, "Si el correo existe, recibirás un código",
+            Toast.makeText(this, R.string.recovery_code_notice,
                     Toast.LENGTH_LONG).show();
             return;
         }
         // Sustituir por envío de correo al integrar la API.
-        Toast.makeText(this, "Código temporal: " + code, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.temporary_code, code), Toast.LENGTH_LONG).show();
     }
 
     private void cambiarPassword() {
         String code = etCodigo.getText().toString().trim();
         String password = etPassword.getText().toString();
         if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,64}$")) {
-            etPassword.setError("Usa 8-64 caracteres, mayúscula, minúscula y número");
+            etPassword.setError(getString(R.string.password_requirements));
             return;
         }
         if (authRepository.resetPassword(code, password) == AuthRepository.RecoveryResult.INVALID_CODE) {
-            etCodigo.setError("Código incorrecto o vencido");
+            etCodigo.setError(getString(R.string.invalid_recovery_code));
             return;
         }
-        Toast.makeText(this, "Contraseña actualizada", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.password_updated, Toast.LENGTH_LONG).show();
         finish();
     }
 }

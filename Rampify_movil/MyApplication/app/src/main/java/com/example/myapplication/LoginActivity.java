@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (correo.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this,
-                            "Completa tus datos", Toast.LENGTH_SHORT).show();
+                            getString(R.string.fill_details), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 btnEntrar.setEnabled(false);
@@ -48,11 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, MapaActivity.class));
                                 finish();
                             } else if (status == 429) {
-                                Toast.makeText(LoginActivity.this, "Cuenta bloqueada por 15 minutos", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, R.string.account_locked, Toast.LENGTH_LONG).show();
                             } else if (status == 0) {
-                                Toast.makeText(LoginActivity.this, "No fue posible conectar con el servidor", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, R.string.server_unavailable, Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, R.string.invalid_credentials, Toast.LENGTH_SHORT).show();
                             }
                         }));
             }

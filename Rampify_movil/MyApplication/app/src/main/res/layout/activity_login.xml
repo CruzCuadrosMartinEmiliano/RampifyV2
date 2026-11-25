@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="Qué gusto verte"
+            android:text="@string/login_welcome"
             style="@style/Rampify.Title" />
 
 
@@ -38,13 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="32dp"
-            android:text="Inicia sesión para continuar al mapa de tu ciudad."
+            android:text="@string/login_intro"
             style="@style/Rampify.Subtitle" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correo electrónico"
+            android:text="@string/email"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -53,14 +53,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="nombre@correo.com"
+            android:hint="@string/email_example"
             android:inputType="textEmailAddress"
             style="@style/Rampify.EditText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contraseña"
+            android:text="@string/password"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Tu contraseña"
+            android:hint="@string/your_password"
             android:inputType="textPassword"
             style="@style/Rampify.EditText" />
 
@@ -79,7 +79,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="12dp"
             android:padding="4dp"
-            android:text="¿Olvidaste tu contraseña?"
+            android:text="@string/forgot_password"
             style="@style/Rampify.Link" />
 
         <View
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Entrar al mapa"
+            android:text="@string/login_to_map"
             style="@style/Widget.Rampify.Button.Primary" />
 
         <LinearLayout
@@ -106,7 +106,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Aún no tienes cuenta? "
+                android:text="@string/no_account"
                 style="@style/Rampify.Subtitle" />
 
             <TextView
@@ -114,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="Regístrate"
+                android:text="@string/register"
                 style="@style/Rampify.Link" />
         </LinearLayout>
 

@@ -104,7 +104,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
         boolean valido = true;
 
         if (spTipo.getSelectedItemPosition() == 0) {
-            Toast.makeText(this, "Selecciona el tipo de falla", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.select_issue_type, Toast.LENGTH_SHORT).show();
             valido = false;
         }
 
@@ -118,7 +118,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
         }
 
         if (valido && !hayFoto) {
-            Toast.makeText(this, "Añade una fotografía de evidencia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.add_evidence_photo, Toast.LENGTH_SHORT).show();
             valido = false;
         }
 
@@ -127,7 +127,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
 
     private void mostrarConfirmacion() {
         if (typeId <= 0) {
-            Toast.makeText(this, "No se pudo cargar el tipo de falla", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.issue_type_load_failed, Toast.LENGTH_LONG).show();
             cargarTiposProblema();
             return;
         }
@@ -135,7 +135,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
         String base64Image = convertirFotoBase64();
         if (base64Image.isEmpty()) {
             btnEnviar.setEnabled(true);
-            Toast.makeText(this, "No se pudo procesar la fotografía", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.photo_process_failed, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -144,8 +144,8 @@ public class NuevoReporteActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(true);
                     if (!ok) {
                         Toast.makeText(this, status == 0
-                                ? "No fue posible conectar con el servidor"
-                                : "No se pudo enviar el reporte", Toast.LENGTH_LONG).show();
+                                ? getString(R.string.server_unavailable)
+                                : getString(R.string.report_send_failed), Toast.LENGTH_LONG).show();
                         return;
                     }
                     int serverId = data.optInt("id", 0);
@@ -157,11 +157,13 @@ public class NuevoReporteActivity extends AppCompatActivity {
                             etDescripcion.getText().toString().trim(),
                             fotoUri.toString(), lat, lng);
                     new AlertDialog.Builder(this)
-                            .setTitle("Reporte enviado")
-                            .setMessage("Tu folio de seguimiento es:\n\n" + folio)
+                            .setTitle(R.string.report_sent)
+                            .setMessage(getString(R.string.report_folio_message, folio))
                             .setCancelable(false)
                             .setPositiveButton("Aceptar", (dialog, which) -> {
                                 Intent intent = new Intent(this, MapaActivity.class);
+                                intent.putExtra(MapaActivity.EXTRA_REPORT_LATITUDE, lat);
+                                intent.putExtra(MapaActivity.EXTRA_REPORT_LONGITUDE, lng);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
                                 finish();
@@ -226,7 +228,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
                     | Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivityForResult(intent, REQUEST_CAMARA);
         } catch (Exception exception) {
-            Toast.makeText(this, "No se pudo abrir la cámara", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.camera_open_failed, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -275,7 +277,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
                         }
                     });
         } catch (SecurityException exception) {
-            Toast.makeText(this, "No se pudo obtener la ubicación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.location_unavailable, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -284,7 +286,7 @@ public class NuevoReporteActivity extends AppCompatActivity {
             lat = location.getLatitude();
             lng = location.getLongitude();
             tvUbicacion.setText(String.format(java.util.Locale.US,
-                    "Ubicación actual (%.5f, %.5f)", lat, lng));
+                    getString(R.string.location_coordinates), lat, lng));
         }
     }
 

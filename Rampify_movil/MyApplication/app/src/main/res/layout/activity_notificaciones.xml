@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:text="← Volver"
+        android:text="@string/back"
         style="@style/Rampify.Link" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Notificaciones"
+        android:text="@string/notifications"
         style="@style/Rampify.Title" />
 
     <TextView
@@ -26,31 +26,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Elige qué avisos quieres recibir."
+        android:text="@string/notification_intro"
         style="@style/Rampify.Subtitle" />
 
     <Switch
         android:id="@+id/swEstado"
         android:checked="true"
-        android:text="Cambios de estado de mis reportes"
+        android:text="@string/notify_report_status"
         style="@style/Rampify.Switch" />
 
     <Switch
         android:id="@+id/swCercanos"
         android:checked="true"
-        android:text="Nuevos reportes cercanos"
+        android:text="@string/notify_nearby_reports"
         style="@style/Rampify.Switch" />
 
     <Switch
         android:id="@+id/swSolicitudes"
         android:checked="true"
-        android:text="Respuesta a mis solicitudes"
+        android:text="@string/notify_request_response"
         style="@style/Rampify.Switch" />
 
     <Switch
         android:id="@+id/swNovedades"
         android:checked="false"
-        android:text="Novedades de la aplicación"
+        android:text="@string/notify_app_updates"
         style="@style/Rampify.Switch" />
 
 </LinearLayout>

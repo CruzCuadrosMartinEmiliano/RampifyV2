@@ -17,14 +17,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Historial"
+            android:text="@string/history"
             style="@style/Rampify.Title" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Consulta y da seguimiento a tus reportes."
+            android:text="@string/history_intro"
             style="@style/Rampify.Subtitle" />
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:text="Filtrar por estado"
+                android:text="@string/filter_by_status"
                 android:singleLine="true"
                 style="@style/Rampify.Label" />
 
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No hay reportes con ese estado."
+            android:text="@string/no_reports_status"
             android:visibility="gone"
             style="@style/Rampify.Subtitle" />
     </FrameLayout>

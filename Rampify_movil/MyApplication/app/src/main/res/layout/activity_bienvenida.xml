@@ -39,14 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Da visualización al inmobiliario"
+            android:text="@string/welcome_tagline"
             style="@style/Rampify.Title" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Selecciona tu zona actual en la Ciudad de México y reporta el inmobiliario inexistente o defectuoso."
+            android:text="@string/welcome_intro"
             style="@style/Rampify.Subtitle" />
 
 
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Crear cuenta"
+            android:text="@string/create_account"
             style="@style/Widget.Rampify.Button.Primary" />
 
         <Button
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Ya tengo cuenta"
+            android:text="@string/have_account"
             style="@style/Widget.Rampify.Button.Secondary" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Al continuar aceptas nuestros Términos y Aviso de privacidad."
+            android:text="@string/terms_notice"
             android:textSize="11sp"
             style="@style/Rampify.Subtitle" />
 

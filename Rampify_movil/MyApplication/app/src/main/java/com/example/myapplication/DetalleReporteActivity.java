@@ -40,7 +40,7 @@ public class DetalleReporteActivity extends AppCompatActivity {
         reporte = getIntent().getParcelableExtra("reporte");
 
         if (reporte == null) {
-            Toast.makeText(this, "No se pudo cargar el reporte", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.report_load_failed, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -68,7 +68,7 @@ public class DetalleReporteActivity extends AppCompatActivity {
 
     private void mostrarDatos() {
         tvTipo.setText(reporte.getTipo());
-        tvFolio.setText("Folio " + reporte.getFolio());
+        tvFolio.setText(getString(R.string.folio_label, reporte.getFolio()));
         tvDireccion.setText(reporte.getDireccion() + " · " + reporte.getZona());
         tvFecha.setText(reporte.getFecha());
         tvDescripcion.setText(reporte.getDescripcion());
@@ -104,9 +104,9 @@ public class DetalleReporteActivity extends AppCompatActivity {
                             detalle.optString("tipo", reporte.getTipo()),
                             detalle.optString("descripcion", reporte.getDescripcion()),
                             detalle.optString("estado", reporte.getEstado()),
-                            detalle.optString("direccion", "Ubicación reportada"),
+                            detalle.optString("direccion", getString(R.string.report_location)),
                             detalle.optString("fecha", reporte.getFecha()),
-                            "Ciudad de México",
+                            getString(R.string.mexico_city),
                             detalle.optDouble("latitud", reporte.getLat()),
                             detalle.optDouble("longitud", reporte.getLng()),
                             reporte.getFotoUri());

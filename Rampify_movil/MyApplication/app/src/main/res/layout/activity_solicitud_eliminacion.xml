@@ -16,14 +16,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="← Volver"
+            android:text="@string/back"
             style="@style/Rampify.Link" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Solicitar eliminación"
+            android:text="@string/request_deletion_title"
             style="@style/Rampify.Title" />
 
         <TextView
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Por qué deseas eliminar este reporte?"
+            android:text="@string/why_delete_report"
             style="@style/Rampify.Label" />
 
         <RadioGroup
@@ -54,42 +54,42 @@
                 android:id="@+id/rbError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lo envié por error"
+                android:text="@string/reason_mistake"
                 style="@style/Rampify.RadioButton" />
 
             <RadioButton
                 android:id="@+id/rbDuplicado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Es un reporte duplicado"
+                android:text="@string/reason_duplicate"
                 style="@style/Rampify.RadioButton" />
 
             <RadioButton
                 android:id="@+id/rbResuelto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="El problema ya se resolvió"
+                android:text="@string/reason_resolved"
                 style="@style/Rampify.RadioButton" />
 
             <RadioButton
                 android:id="@+id/rbDatos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Los datos son incorrectos"
+                android:text="@string/reason_incorrect"
                 style="@style/Rampify.RadioButton" />
 
             <RadioButton
                 android:id="@+id/rbOtro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Otro motivo"
+                android:text="@string/reason_other"
                 style="@style/Rampify.RadioButton" />
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comentarios (opcional)"
+            android:text="@string/optional_comments"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Cuéntanos más sobre tu solicitud"
+            android:hint="@string/request_details_hint"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLength="300"
             style="@style/Rampify.EditText.Multiline" />
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Enviar solicitud"
+            android:text="@string/send_request"
             style="@style/Widget.Rampify.Button.Delete" />
 
         <Button
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             style="@style/Widget.Rampify.Button.Secondary" />
 
     </LinearLayout>

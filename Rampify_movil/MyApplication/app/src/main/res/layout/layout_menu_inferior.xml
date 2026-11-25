@@ -27,7 +27,7 @@
             android:focusable="true"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Mapa"
+            android:text="@string/map_navigation"
             android:textColor="@color/app_on_surface_variant"
             android:textSize="12sp" />
 
@@ -43,7 +43,7 @@
             android:focusable="true"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Historial"
+            android:text="@string/history"
             android:textColor="@color/app_on_surface_variant"
             android:textSize="12sp" />
 
@@ -59,7 +59,7 @@
             android:focusable="true"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Perfil"
+            android:text="@string/profile"
             android:textColor="@color/app_on_surface_variant"
             android:textSize="12sp" />
     </LinearLayout>

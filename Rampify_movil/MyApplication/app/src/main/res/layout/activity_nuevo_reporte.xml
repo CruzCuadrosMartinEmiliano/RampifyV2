@@ -16,14 +16,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="← Volver"
+            android:text="@string/back"
             style="@style/Rampify.Link" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Reportar un inmobiliario"
+            android:text="@string/report_title"
             style="@style/Rampify.Title" />
 
         <TextView
@@ -31,13 +31,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
-            android:text="Completa los datos para enviar tu reporte."
+            android:text="@string/report_intro"
             style="@style/Rampify.Subtitle" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo de falla"
+            android:text="@string/issue_type"
             style="@style/Rampify.Label" />
 
         <Spinner
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción"
+            android:text="@string/description"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="Añade una breve descripción"
+            android:hint="@string/description_hint"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLength="300"
             style="@style/Rampify.EditText.Multiline" />
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fotografía de evidencia"
+            android:text="@string/evidence_photo"
             style="@style/Rampify.Label" />
 
         <FrameLayout
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Toca para añadir una foto"
+                    android:text="@string/tap_add_photo"
                     style="@style/Rampify.Subtitle" />
             </LinearLayout>
 
@@ -117,7 +117,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicación"
+            android:text="@string/location"
             style="@style/Rampify.Label" />
 
         <TextView
@@ -127,7 +127,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input"
             android:padding="14dp"
-            android:text="Obteniendo ubicación actual..."
+            android:text="@string/getting_location"
             style="@style/Rampify.Subtitle" />
 
         <Button
@@ -135,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Enviar reporte"
+            android:text="@string/send_report"
             style="@style/Widget.Rampify.Button.Primary" />
 
     </LinearLayout>

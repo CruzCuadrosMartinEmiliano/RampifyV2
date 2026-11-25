@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Crea tu cuenta"
+            android:text="@string/register_title"
             style="@style/Rampify.Title" />
 
         <TextView
@@ -39,13 +39,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
-            android:text="Te tomará menos de un minuto. Después podrás elegir tu zona."
+            android:text="@string/register_intro"
             style="@style/Rampify.Subtitle" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="@string/name"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="Tu nombre"
+            android:hint="@string/your_name"
             android:inputType="textPersonName"
             style="@style/Rampify.EditText" />
 
@@ -63,7 +63,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correo electrónico"
+            android:text="@string/email"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -72,14 +72,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="nombre@correo.com"
+            android:hint="@string/email_example"
             android:inputType="textEmailAddress"
             style="@style/Rampify.EditText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contraseña"
+            android:text="@string/password"
             style="@style/Rampify.Label" />
 
         <EditText
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Mínimo 8 caracteres"
+            android:hint="@string/password_minimum"
             android:inputType="textPassword"
             style="@style/Rampify.EditText" />
 
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Acepto los Términos y el Aviso de privacidad"
+            android:text="@string/accept_terms"
             style="@style/Rampify.CheckBox" />
 
         <View
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Crear cuenta y continuar"
+            android:text="@string/register_continue"
             style="@style/Widget.Rampify.Button.Primary" />
 
         <LinearLayout
@@ -122,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Ya tienes cuenta? "
+                android:text="@string/already_have_account"
                 style="@style/Rampify.Subtitle" />
 
             <TextView
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="Inicia sesión"
+                android:text="@string/login"
                 style="@style/Rampify.Link" />
         </LinearLayout>
 
