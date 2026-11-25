@@ -24,7 +24,7 @@ app.use((req, res, next) => { console.log(`[${new Date().toLocaleTimeString()}] 
 // Frontend estático (carpeta frontend/ junto a backend/)
 const FRONTEND_DIR = process.env.FRONTEND_DIR || path.join(__dirname, '..', '..', 'frontend');
 app.use(express.static(FRONTEND_DIR));
-app.get('/', (req, res) => res.redirect('/html/login.html'));
+app.get('/', (req, res) => res.redirect('/html/index.html'));
 app.get('/health', (req, res) => res.json({ ok: true, service: 'rampify-api' }));
 
 app.use('/api/auth', require('./Routers/auth'));

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rampify · Reporta barreras de movilidad en la Ciudad de México</title>
+  <meta name="description" content="Rampify es una app para marcar en un mapa las barreras de movilidad de la Ciudad de México y darles seguimiento hasta que se resuelvan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/landing.css">
+</head>
+<body class="lp">
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="lp-header" data-header>
+    <div class="wrap lp-header__in">
+      <a class="lp-brand" href="index.html" aria-label="Rampify, inicio">
+        <span class="lp-brand__logo" aria-hidden="true">R</span><span class="lp-brand__name">Rampify</span>
+      </a>
+      <nav class="lp-nav" aria-label="Secciones de la página">
+        <a href="#estados">Estados</a>
+        <a href="#como-funciona">Cómo se reporta</a>
+        <a href="#quien-usa-que">Quién usa qué</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="lp-btn" href="login.html">Iniciar sesión</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- HERO -->
+    <section class="wrap hero" aria-labelledby="hero-titulo">
+      <div class="hero__copy">
+        <h1 class="display" id="hero-titulo">Si no hay rampa, que quede en el mapa.</h1>
+        <p class="lead">Rampify es una app para marcar las barreras de movilidad de la Ciudad de México: rampas que faltan, lugares sin acondicionar para personas con discapacidad. Cada reporte llega a una asociación que lo revisa y le da seguimiento hasta cerrarlo.</p>
+        <div class="hero__actions">
+          <div class="stores">
+            <a class="lp-store" data-store="android" aria-disabled="true"><b>Google Play</b><small>Próximamente</small></a>
+            <a class="lp-store" data-store="ios" aria-disabled="true"><b>App Store</b><small>Próximamente</small></a>
+          </div>
+          <p class="hero__note">¿Trabajas en la asociación? <a class="text-link" href="login.html">Entra a la plataforma web</a>.</p>
+        </div>
+      </div>
+
+      <figure class="mapbox" style="margin:0">
+        <figcaption class="legend">
+          <span><i class="dot dot--me"></i>Tú</span>
+          <span><i class="dot dot--pending"></i>Pendiente</span>
+          <span><i class="dot dot--progress"></i>En proceso</span>
+        </figcaption>
+        <div class="mapbox__frame">
+          <svg viewBox="0 0 560 500" role="img" aria-label="Mapa ilustrativo de una zona de la ciudad con reportes marcados: tres Pendientes, dos En proceso, dentro de un radio de 1 km alrededor de una persona.">
+            <defs>
+              <symbol id="pin" viewBox="0 0 32 40">
+                <path d="M16 1C7.7 1 1 7.6 1 15.8 1 27 16 39 16 39s15-12 15-23.2C31 7.6 24.3 1 16 1z" fill="currentColor" stroke="var(--map-street)" stroke-width="2"/>
+                <circle cx="16" cy="15.5" r="5.5" fill="#fff"/>
+              </symbol>
+            </defs>
+            <rect class="m-ground" width="560" height="500"/>
+            <rect class="m-park" x="278" y="248" width="104" height="94" rx="16"/>
+            <rect class="m-block" x="140" y="124" width="106" height="92" rx="6"/>
+            <rect class="m-block" x="272" y="124" width="116" height="92" rx="6"/>
+            <rect class="m-block" x="140" y="244" width="106" height="104" rx="6"/>
+            <rect class="m-block" x="140" y="374" width="106" height="64" rx="6"/>
+            <rect class="m-block" x="412" y="244" width="76" height="104" rx="6"/>
+            <g class="m-street">
+              <path d="M0 110H560" stroke-width="14"/><path d="M0 230H560" stroke-width="22"/><path d="M0 360H560" stroke-width="14"/><path d="M0 450H560" stroke-width="12"/>
+              <path d="M120 0V500" stroke-width="14"/><path d="M260 0V500" stroke-width="14"/><path d="M400 0V500" stroke-width="22"/><path d="M500 0V500" stroke-width="12"/>
+              <path d="M20 490L480 30" stroke-width="16"/>
+            </g>
+            <circle class="m-radius" cx="200" cy="295" r="142"/>
+            <text class="m-label" x="200" y="140" text-anchor="middle">1 km</text>
+            <use href="#pin" class="pin pin--pending" x="134" y="170" width="32" height="40"/>
+            <use href="#pin" class="pin pin--pending" x="268" y="168" width="32" height="40"/>
+            <use href="#pin" class="pin pin--pending" x="242" y="372" width="32" height="40"/>
+            <use href="#pin" class="pin pin--progress" x="76" y="302" width="32" height="40"/>
+            <use href="#pin" class="pin pin--progress" x="318" y="262" width="32" height="40"/>
+            <circle class="m-me-ring" cx="200" cy="295" r="11"/><circle class="m-me" cx="200" cy="295" r="5"/>
+          </svg>
+        </div>
+        <div class="mapcard">
+          <span class="pill pill--pending">Pendiente</span>
+          <div class="mapcard__folio">RMP-7K2X9QDA</div>
+          <div class="mapcard__text">Cruce sin rampa en la esquina</div>
+          <div class="mapcard__tag">Ejemplo ilustrativo, no es un reporte real.</div>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ESTADOS -->
+    <section class="band section" id="estados" aria-labelledby="estados-titulo">
+      <div class="wrap">
+        <div class="states__head">
+          <h2 class="h2" id="estados-titulo">Un reporte no se pierde: avanza por estados</h2>
+          <p class="lead">Desde que lo envías sabes en qué punto está. El mapa solo muestra lo que sigue abierto; lo resuelto queda en tu historial.</p>
+        </div>
+        <ol class="track">
+          <li class="station" data-state="pendiente">
+            <h3 class="station__name">Pendiente</h3>
+            <p>Lo acabas de enviar. Ya tiene folio y aparece en el mapa para quien pase cerca.</p>
+            <p class="station__who">Se crea al enviarlo.</p>
+          </li>
+          <li class="station" data-state="proceso">
+            <h3 class="station__name">En proceso</h3>
+            <p>Alguien de la asociación lo tomó. Sigue visible en el mapa mientras se atiende.</p>
+            <p class="station__who">Lo cambia una persona empleada.</p>
+          </li>
+          <li class="station" data-state="solucionado">
+            <h3 class="station__name">Solucionado</h3>
+            <p>La barrera ya se atendió. Sale del mapa y se queda en tu historial. Si la barrera sigue ahí, el reporte puede volver a En proceso.</p>
+            <p class="station__who">Lo cambia una persona empleada.</p>
+          </li>
+        </ol>
+        <div class="rejected">
+          <h3 class="station__name">Rechazado</h3>
+          <p>Un administrador puede descartar un reporte que sigue Pendiente cuando no cumple los criterios de la plataforma. En tu historial ves qué criterio fue y el comentario que lo explica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO SE REPORTA -->
+    <section class="section wrap" id="como-funciona" aria-labelledby="pasos-titulo">
+      <div class="how">
+        <div class="how__side">
+          <h2 class="h2" id="pasos-titulo">Reportar lleva cuatro pasos</h2>
+          <p class="lead">Todo se hace desde la app, con tu cuenta de ciudadano.</p>
+        </div>
+        <ol class="steps">
+          <li class="step"><span class="step__n" aria-hidden="true">1</span>
+            <div><h3 class="h3">Abre el mapa</h3><p>Ves los reportes que ya hay a menos de 1 km de donde estás. Así sabes si alguien marcó antes ese lugar.</p></div></li>
+          <li class="step"><span class="step__n" aria-hidden="true">2</span>
+            <div><h3 class="h3">Marca el lugar y elige el tipo de barrera</h3><p>Los tipos salen de un catálogo que mantiene la asociación.</p></div></li>
+          <li class="step"><span class="step__n" aria-hidden="true">3</span>
+            <div><h3 class="h3">Cuéntalo con tus palabras</h3><p>La descripción va de 10 a 500 caracteres. Puedes agregar una foto en JPG o PNG, es opcional.</p></div></li>
+          <li class="step"><span class="step__n" aria-hidden="true">4</span>
+            <div><h3 class="h3">Guarda tu folio</h3><p>Tiene el formato RMP-XXXXXXXX. Con él, o desde tu historial, consultas cómo va tu reporte.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- QUIÉN USA QUÉ -->
+    <section class="section wrap" id="quien-usa-que" aria-labelledby="roles-titulo" style="padding-top:0">
+      <div class="roles__intro">
+        <h2 class="h2" id="roles-titulo">Quién usa qué</h2>
+        <p class="lead" style="max-width:26rem">La app es para la ciudadanía. La web es solo para quienes atienden los reportes.</p>
+      </div>
+      <dl class="roles">
+        <div class="role">
+          <dt><span class="role__name">Ciudadanía</span><span class="role__where">App móvil</span></dt>
+          <dd><p>Reporta lo que ve en la calle y consulta lo que otras personas ya reportaron.</p></dd>
+          <dd><ul>
+            <li>Marca el lugar en el mapa y envía el reporte.</li>
+            <li>Ve los reportes Pendientes y En proceso a menos de 1 km.</li>
+            <li>Revisa su historial y filtra por fecha o folio.</li>
+            <li>Pide retirar un reporte propio.</li>
+            <li>Elige qué avisos quiere recibir.</li>
+          </ul></dd>
+        </div>
+        <div class="role">
+          <dt><span class="role__name">Empleado de la asociación</span><span class="role__where">Plataforma web</span></dt>
+          <dd><p>Revisa los reportes que llegan y decide en qué punto está cada uno. Su cuenta la aprueba un administrador.</p></dd>
+          <dd><ul>
+            <li>Consulta reportes con filtros por fecha, estado y tipo.</li>
+            <li>Pasa un reporte de Pendiente a En proceso y de ahí a Solucionado. Cada cambio queda en el historial.</li>
+            <li>Reabre un reporte Solucionado si la barrera sigue ahí.</li>
+            <li>Denuncia a quien haga mal uso de la app.</li>
+          </ul></dd>
+        </div>
+        <div class="role">
+          <dt><span class="role__name">Administrador</span><span class="role__where">Plataforma web</span></dt>
+          <dd><p>Administra la plataforma: cuentas, accesos y calidad de los reportes.</p></dd>
+          <dd><ul>
+            <li>Aprueba o rechaza las solicitudes de acceso de empleados, y puede suspenderlos o darlos de baja.</li>
+            <li>Invita a otros administradores.</li>
+            <li>Mantiene los catálogos, como los tipos de barrera.</li>
+            <li>Rechaza reportes Pendientes que no cumplen los criterios.</li>
+            <li>Resuelve las solicitudes para eliminar reportes y atiende las denuncias.</li>
+          </ul></dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- PANEL DE EJEMPLO -->
+    <section class="dark section" aria-labelledby="panel-titulo">
+      <div class="wrap panel-sec">
+        <div>
+          <h2 class="h2" id="panel-titulo">Así se ve el trabajo desde la asociación</h2>
+          <p class="lead">Una tabla de reportes con filtros, y un cambio de estado por reporte.</p>
+        </div>
+        <div class="panel" role="group" aria-label="Vista de ejemplo del panel de empleados">
+          <div class="panel__bar"><span>Filtrar por</span><span class="chip">Fecha</span><span class="chip">Estado</span><span class="chip">Tipo</span></div>
+          <div class="panel__scroll">
+            <table>
+              <thead><tr><th scope="col">Folio</th><th scope="col">Tipo</th><th scope="col">Estado</th><th scope="col">Siguiente paso</th></tr></thead>
+              <tbody>
+                <tr><td class="folio">RMP-4H8Q2LMA</td><td>Rampa inexistente</td><td><span class="pill pill--pending">Pendiente</span></td><td>Pasar a En proceso</td></tr>
+                <tr><td class="folio">RMP-9D3WX6TB</td><td>Acceso solo con escalones</td><td><span class="pill pill--progress">En proceso</span></td><td>Pasar a Solucionado</td></tr>
+                <tr><td class="folio">RMP-M2P7C5ZE</td><td>Rampa con pendiente muy alta</td><td><span class="pill pill--pending">Pendiente</span></td><td>Pasar a En proceso</td></tr>
+                <tr><td class="folio">RMP-Z8K1N4RV</td><td>Rampa inexistente</td><td><span class="pill pill--done">Solucionado</span></td><td>Reabrir si sigue la barrera</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="panel__note">Datos de ejemplo para ilustrar la vista. No son reportes reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- USO RESPONSABLE -->
+    <section class="section wrap" aria-labelledby="cuidado-titulo">
+      <div class="care">
+        <h2 class="h2 care__big" id="cuidado-titulo" style="max-width:24ch">Un reporte falso le quita tiempo a uno verdadero</h2>
+        <div class="care__item">
+          <h3 class="h3">Denuncias</h3>
+          <p>Si alguien de la asociación ve que una persona usa mal la app o incumple los Términos y Condiciones, la denuncia desde el reporte. Un administrador la revisa y decide.</p>
+        </div>
+        <div class="care__item">
+          <h3 class="h3">Qué puede pasar</h3>
+          <p>El administrador puede desestimar la denuncia, enviar una alerta, bloquear la cuenta (baneo) o eliminarla. Cada decisión queda registrada.</p>
+        </div>
+        <div class="care__item">
+          <h3 class="h3">Retirar un reporte tuyo</h3>
+          <p>Si ya no quieres que un reporte siga en el mapa, envías una solicitud con un motivo de 10 a 300 caracteres. Un administrador la aprueba o la rechaza.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DÓNDE ESTAMOS -->
+    <section class="band section" aria-labelledby="estado-titulo">
+      <div class="wrap status">
+        <div>
+          <h2 class="h2" id="estado-titulo">Qué ya funciona y qué falta</h2>
+          <div class="team prose">
+            <p><strong>Rampify lo construimos tres jóvenes desarrolladores.</strong></p>
+            <p class="muted">Preferimos decirte lo que falta que llenar esta página de cifras que todavía no existen.</p>
+          </div>
+        </div>
+        <div class="status__lists">
+          <div>
+            <h3 class="h3">Ya funciona</h3>
+            <ul class="tick">
+              <li>Cuenta en la app y reportes con ubicación, descripción y foto</li>
+              <li>Mapa con los reportes cercanos</li>
+              <li>Historial de reportes y preferencias de avisos</li>
+              <li>Plataforma web para empleados y administradores</li>
+              <li>Recuperación de contraseña con código enviado al correo</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="h3">Todavía no</h3>
+            <ul class="tick tick--todo">
+              <li>La app en Google Play y en App Store</li>
+              <li>Cifras de reportes atendidos: aún no hay datos públicos que mostrar</li>
+              <li>Testimonios: los pondremos cuando existan, no antes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS -->
+    <section class="section wrap" id="preguntas" aria-labelledby="faq-titulo">
+      <div class="faq">
+        <h2 class="h2" id="faq-titulo">Preguntas frecuentes</h2>
+        <div class="faq__list">
+          <details><summary>¿Necesito una cuenta para reportar?</summary>
+            <p>Sí. La creas en la app móvil. La plataforma web no es para ciudadanos: ahí entran los empleados y administradores.</p></details>
+          <details><summary>¿Hasta dónde veo los reportes de otras personas?</summary>
+            <p>Ves los que están a menos de 1 km de tu ubicación, siempre que sigan Pendientes o En proceso. Los Solucionados ya no aparecen en el mapa.</p></details>
+          <details><summary>¿Qué pasa si rechazan mi reporte?</summary>
+            <p>En tu historial aparece como Rechazado, con el criterio y el comentario del administrador que lo explican.</p></details>
+          <details><summary>¿Puedo borrar un reporte que envié?</summary>
+            <p>Puedes pedirlo. Envías una solicitud con un motivo de 10 a 300 caracteres y un administrador la revisa.</p></details>
+          <details><summary>Trabajo en la asociación, ¿cómo entro?</summary>
+            <p>Pide acceso con tu correo en <a class="text-link" href="registro-empleado.html">Solicitar acceso</a>. Un administrador revisa la petición antes de activar tu cuenta.</p></details>
+          <details><summary>Olvidé mi contraseña de la plataforma web</summary>
+            <p>En <a class="text-link" href="login.html">Iniciar sesión</a> elige “¿Olvidaste tu contraseña?”. Te enviamos un código de 6 dígitos al correo y vence en 10 minutos.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section class="dark section" aria-labelledby="cierre-titulo">
+      <div class="wrap cta">
+        <div>
+          <h2 class="h2" id="cierre-titulo">¿Hay una barrera en tu calle?</h2>
+          <p class="lead" style="margin-top:var(--sp-5)">Cuando la app esté en las tiendas, la marcas en el mapa y le sigues el rastro con tu folio.</p>
+        </div>
+        <div class="cta__side">
+          <div class="stores">
+            <a class="lp-store" data-store="android" aria-disabled="true"><b>Google Play</b><small>Próximamente</small></a>
+            <a class="lp-store" data-store="ios" aria-disabled="true"><b>App Store</b><small>Próximamente</small></a>
+          </div>
+          <a class="text-link" href="login.html">Soy de la asociación: iniciar sesión</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- COMPLETAR cuando existan: correo o red social de contacto, nombre de la asociación aliada, aviso de privacidad y términos. -->
+  <footer class="lp-footer">
+    <div class="wrap lp-footer__in">
+      <span>© <span data-year>2026</span> Rampify</span>
+      <nav aria-label="Acceso a la plataforma">
+        <a href="login.html">Iniciar sesión</a>
+        <a href="registro-empleado.html">Solicitar acceso como empleado</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/landing.js"></script>
+</body>
+</html>
