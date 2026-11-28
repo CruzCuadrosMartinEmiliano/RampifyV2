@@ -1,3 +1,9 @@
+# Integrantes del Equipo 8:
+-Álvarez Bastidas Juan Luis
+-Cruz Cuadros Martín Emiliano
+-García Lara Juan Carlos
+
+
 # Rampify
 
 Plataforma para documentar barreras de accesibilidad urbana en la
@@ -23,6 +29,3 @@ Ciudad de México y dar seguimiento a su atención.
 Abrir Rampify_movil/RampifyV1 con Android Studio. La URL del backend
 está en app/build.gradle.kts (API_BASE_URL).
 
-## Variables de entorno
-Ver .env.example. El archivo .env real NUNCA se sube a Git.
-Despliegue: ver docs/despliegue.md
